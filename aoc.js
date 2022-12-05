@@ -2255,9 +2255,34 @@ const caloriesRaw = `
 2385
 3552`
 
-const calorieArray = caloriesRaw.split('\n\n')
+const caloriesArray = caloriesRaw.split('\n\n')
+
+console.log("Calories Raw", caloriesRaw)
+console.log("Calories Array", caloriesArray)
+
+// Split list into individual elves
+
+firstElf = function splitCalories() {
+	elfEntry = caloriesArray.shift()
+	
+	//Converting a single line into a number - DONE
+	//find last newline (\n)
+	let index = elfEntry.lastIndexOf("\n")
+	
+	// slice from newline to end
+	let cals = elfEntry.slice(index)
+	
+	// convert from string to integer
+	let calNum = parseInt(cals)
+	
+	// TODO: Create function to split at ALL newlines (not just the final one)
+
+}
+
+firstElf()
 
 // Add the calories for a single elf.
+
 
 
 
