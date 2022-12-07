@@ -2257,29 +2257,52 @@ const caloriesRaw = `
 
 const caloriesArray = caloriesRaw.split('\n\n')
 
-console.log("Calories Raw", caloriesRaw)
-console.log("Calories Array", caloriesArray)
+//console.log("Calories Raw", caloriesRaw)
+//console.log("Calories Array", caloriesArray)
+
+elfCals	= caloriesArray.splice(`\n`)
+console.log("elfCals", elfCals)
 
 // Split list into individual elves
 
-firstElf = function splitCalories() {
-	elfEntry = caloriesArray.shift()
+elfCalorieParserExample = function splitCalories() {
+	firstElf = caloriesArray.shift()
 	
 	//Converting a single line into a number - DONE
 	//find last newline (\n)
-	let index = elfEntry.lastIndexOf("\n")
+	let index = firstElf.lastIndexOf("\n")
+	console.log(index)
 	
 	// slice from newline to end
-	let cals = elfEntry.slice(index)
+	let finalCals = firstElf.slice(index)
+	let firstCals = firstElf.slice(0, index)
+	let calories = Array(parseInt(firstCals), parseInt(finalCals))
 	
 	// convert from string to integer
-	let calNum = parseInt(cals)
-	
-	// TODO: Create function to split at ALL newlines (not just the final one)
+	console.log("firstElf result", calories, firstElf)
 
 }
 
-firstElf()
+//elfCalorieParserExample()
+
+// TODO: Create function to split at ALL newlines (not just the final one)
+const newline = "\n"
+
+
+function splitCalorieCounter(calorieArray) {
+	console.log("INSIDE SPLIT CAL")
+	// For each elf calorie entry
+	calorieArray.forEach((e) => {
+		entries = e.split(newline)
+		console.log(entries)
+		// save the index numbers of all newlines
+		// slice array from beginning -> newline(s) -> end
+		// convert all these strings into numbers
+		// add them together
+	})
+}
+	
+splitCalorieCounter(elfCals)
 
 // Add the calories for a single elf.
 
