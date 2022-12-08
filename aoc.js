@@ -2266,43 +2266,58 @@ console.log("elfCals", elfCals)
 // Split list into individual elves
 
 elfCalorieParserExample = function splitCalories() {
-	firstElf = caloriesArray.shift()
-	
+	firstElf = caloriesArray.shift()	
 	//Converting a single line into a number - DONE
 	//find last newline (\n)
 	let index = firstElf.lastIndexOf("\n")
-	console.log(index)
-	
+	console.log(index)	
 	// slice from newline to end
 	let finalCals = firstElf.slice(index)
 	let firstCals = firstElf.slice(0, index)
-	let calories = Array(parseInt(firstCals), parseInt(finalCals))
-	
+	let calories = Array(parseInt(firstCals), parseInt(finalCals))	
 	// convert from string to integer
 	console.log("firstElf result", calories, firstElf)
-
 }
-
 //elfCalorieParserExample()
 
-// TODO: Create function to split at ALL newlines (not just the final one)
+
 const newline = "\n"
+const returnInt = (e) => parseInt(e, 10)
+let sortedCalories = new Array()
+function sortNums(a, b) {
+  return a - b;
+}
 
-
-function splitCalorieCounter(calorieArray) {
-	console.log("INSIDE SPLIT CAL")
+function splitCalorieCounter(calorieArrayStr) {
 	// For each elf calorie entry
-	calorieArray.forEach((e) => {
-		entries = e.split(newline)
-		console.log(entries)
-		// save the index numbers of all newlines
-		// slice array from beginning -> newline(s) -> end
-		// convert all these strings into numbers
-		// add them together
+	calorieArrayStr.forEach((e) => {
+		// Split each calorie entry on a newline
+		calorieStrings = e.split(newline)
+		//console.log(calorieStrings, typeof calorieStrings)
+		// Convert strings into numbers, put into a new array
+		const calorieArray = calorieStrings.map(returnInt)
+		//console.log(calorieArray)
+		// Add each array's numbers
+		const addedCalories = calorieArray.reduce((acc, curr) => acc + curr, 0)
+		sortedCalories.push(addedCalories)
+		//console.log(addedCalories, typeof addedCalories)
+		//orderedCalories = addedCalories.sort((a,b) => a - b)
+		//console.log(orderedCalories)
 	})
+	sortedCalories.sort(sortNums)
+	//console.log(sortedCalories)
 }
 	
 splitCalorieCounter(elfCals)
+
+function topThreeElfClars(sortedCalories) {
+	// find length of calorie array
+	const arrayLen = sortedCalories.length
+	const topThreeCals = sortedCalories.reduce((acc, curr, arrayLen - 3) => {acc + cur, 0})
+	console.log(topThreeCals)
+}
+
+
 
 // Add the calories for a single elf.
 
