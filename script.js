@@ -1,7 +1,9 @@
 console.log("Connected to JS")
 
 // Day 1
-
+const day11 = document.getElementById('day1-1')
+const day12 = document.getElementById('day1-2')
+console.log(day11)
 // Get a list of lots of numbers with newlines separating each elf's calories
 
 const caloriesRaw = `
@@ -2258,7 +2260,6 @@ const caloriesRaw = `
 const caloriesArray = caloriesRaw.split('\n\n')
 
 elfCals	= caloriesArray.splice(`\n`)
-console.log("elfCals", elfCals)
 
 const newline = "\n"
 const returnInt = (e) => parseInt(e, 10)
@@ -2284,13 +2285,8 @@ function splitCalorieCounter(calorieArrayStr) {
 }
 	
 const day11Solution = splitCalorieCounter(elfCals)
-const day11 = document.getElementById('day1-1')
-console.log(day11, typeof day11)
 console.log(day11Solution)
-const asolution = day11.innerText(day11Solution)
-
-
-
+day11.innerText = day11Solution
 
 // Day 1-2
 function topThreeElfCals(sortedCalories) {
@@ -2302,7 +2298,8 @@ function topThreeElfCals(sortedCalories) {
 }
 
 const day12Solution = topThreeElfCals(sortedCalories)
-const day12 = document.querySelector('.day1-2')
+day12.innerText = day12Solution
 
 
+// Day 2
 
