@@ -2301,6 +2301,7 @@ day12.innerText = day12Solution
 
 // Day 2
 const day21 = document.getElementById('day2-1')
+const day22 = document.getElementById('day2-2')
 
 // 2-1
 const rpsStrategyRaw = `B Y
@@ -4804,7 +4805,6 @@ A Z
 A X
 C Y`
 const rpsStrategyArray = rpsStrategyRaw.split('\n')
-console.log(rpsStrategyArray)
 
 // Creating score counter
 // X = 1 point, Y = 2, Z = 3
@@ -4846,7 +4846,53 @@ rpsStrategyArray.forEach((e) => {
 	}
 	strategyScore = strategyScore + score
 })
+
 const day21Solution = strategyScore
 day21.innerText = day21Solution
 
+// 2-2
+// Create second score counter
+// Opponent plays A = rock, B = paper, C = scissor
+// You play Rock = 1, Paper = 2, Scissor = 3
+// X = 0 (lose), Y = 3 (draw), Z = 6 (win)
 
+let secondStrategyScore = 0
+let secondScore = 0
+
+rpsStrategyArray.forEach((e) => {
+	switch(e) {
+		case 'A X':
+			secondScore = 3
+			break;
+		case 'B X':
+			secondScore = 1
+			break
+		case 'C X':
+			secondScore = 2
+			break
+		case 'A Y':
+			secondScore = 4
+			break
+		case 'B Y':
+			secondScore = 5
+			break
+		case 'C Y':
+			secondScore = 6
+			break
+		case 'A Z':
+			secondScore = 8
+			break
+		case 'B Z':
+			secondScore = 9
+			break
+		case 'C Z':
+			secondScore = 7
+			break
+	}
+	secondStrategyScore = secondStrategyScore + secondScore
+})
+const day22Solution = secondStrategyScore
+day22.innerText = day22Solution
+
+// Day 3
+// 3-1
