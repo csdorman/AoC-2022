@@ -1,6 +1,6 @@
 console.log("Connected to JS")
 
-// Puzzle 1
+// Day 1
 
 // Get a list of lots of numbers with newlines separating each elf's calories
 
@@ -2257,75 +2257,52 @@ const caloriesRaw = `
 
 const caloriesArray = caloriesRaw.split('\n\n')
 
-//console.log("Calories Raw", caloriesRaw)
-//console.log("Calories Array", caloriesArray)
-
 elfCals	= caloriesArray.splice(`\n`)
 console.log("elfCals", elfCals)
-
-// Split list into individual elves
-
-elfCalorieParserExample = function splitCalories() {
-	firstElf = caloriesArray.shift()	
-	//Converting a single line into a number - DONE
-	//find last newline (\n)
-	let index = firstElf.lastIndexOf("\n")
-	console.log(index)	
-	// slice from newline to end
-	let finalCals = firstElf.slice(index)
-	let firstCals = firstElf.slice(0, index)
-	let calories = Array(parseInt(firstCals), parseInt(finalCals))	
-	// convert from string to integer
-	console.log("firstElf result", calories, firstElf)
-}
-//elfCalorieParserExample()
-
 
 const newline = "\n"
 const returnInt = (e) => parseInt(e, 10)
 let sortedCalories = new Array()
 function sortNums(a, b) {
-  return a - b;
+  return b - a;
 }
 
+// Day 1-1
 function splitCalorieCounter(calorieArrayStr) {
 	// For each elf calorie entry
 	calorieArrayStr.forEach((e) => {
 		// Split each calorie entry on a newline
 		calorieStrings = e.split(newline)
-		//console.log(calorieStrings, typeof calorieStrings)
 		// Convert strings into numbers, put into a new array
 		const calorieArray = calorieStrings.map(returnInt)
-		//console.log(calorieArray)
 		// Add each array's numbers
 		const addedCalories = calorieArray.reduce((acc, curr) => acc + curr, 0)
 		sortedCalories.push(addedCalories)
-		//console.log(addedCalories, typeof addedCalories)
-		//orderedCalories = addedCalories.sort((a,b) => a - b)
-		//console.log(orderedCalories)
 	})
 	sortedCalories.sort(sortNums)
-	//console.log(sortedCalories)
+	return sortedCalories[1]
 }
 	
-splitCalorieCounter(elfCals)
+const day11Solution = splitCalorieCounter(elfCals)
+const day11 = document.getElementById('day1-1')
+console.log(day11, typeof day11)
+console.log(day11Solution)
+const asolution = day11.innerText(day11Solution)
 
-function topThreeElfClars(sortedCalories) {
-	// find length of calorie array
-	const arrayLen = sortedCalories.length
-	const topThreeCals = sortedCalories.reduce((acc, curr, arrayLen - 3) => {acc + cur, 0})
-	console.log(topThreeCals)
+
+
+
+// Day 1-2
+function topThreeElfCals(sortedCalories) {
+	// get the last three calorie totals
+	const lastThreeElfs = sortedCalories.slice(-3)
+	// add them
+	const topThreeCals = lastThreeElfs.reduce((acc, cur) => acc + cur, 0)
+	return topThreeCals
 }
 
-
-
-// Add the calories for a single elf.
-
+const day12Solution = topThreeElfCals(sortedCalories)
+const day12 = document.querySelector('.day1-2')
 
 
 
-// When a newline is encountered - store the total calories and start a new elf's calorie count
-
-// Find the elf with the highest amount of calories being carried
-
-// The calorie amount is the answer
