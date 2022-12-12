@@ -5200,10 +5200,24 @@ gptBBdgzpsBbpQvvPQPRqrdcCC`
 const rucksackItemsArray = rucksackItemsRaw.split('\n')
 console.log(rucksackItemsArray)
 
-rucksackItemsArray.forEach((e) => {
-	//find length of string
-	//divide length by 2
-	//split string in half
-	//use string.includes(?) to which character in first string is found in second
-	//need to use case or another object/array to assign correct priority amount.
+rucksackItemsArray.forEach((elem) => {
+	console.log(elem)
+	// get compartment size and strings
+	const compartmentSize = elem.length/2
+	const compartment1 = elem.slice(0, compartmentSize)
+	const compartment2 = elem.slice(compartmentSize)
+	// TODO: compare each char in compartment 1 to compartment 2
+	
+	console.log(elem, compartment1, compartment2, compartmentSize)
 })
+
+	// compare each char in compartment1 with compartment 2 until a match is found
+
+	
+	//need to use case or another object/array to assign correct priority amount.
+
+
+// for each item in the array
+// split each array item in half (two compartments/rucksack)
+//iterate through each character in the first half and find which char is duplicated in the second compartment
+//
