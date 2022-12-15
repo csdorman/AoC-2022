@@ -4898,6 +4898,15 @@ day22.innerText = day22Solution
 const day31 = document.getElementById('day3-1')
 
 // 3-1
+const day3TestRaw = `
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+
+`
 const rucksackItemsRaw = `
 vvMQnwwvrwWNfrtZJfppmSfJSmSg
 BzGqjlBqBBmztHNFzDHg
@@ -5346,3 +5355,10 @@ function prioritySum(ruckArray) {
 
 const day31Solution = ruckCompSlice(rucksackItemsArray)
 day31.innerText = day31Solution
+
+// 3-2
+
+// TODO: Day 3-2
+//divide arrays into groups of 3
+//find the letter in common with each group (MUST be in all three)
+//find priorities of each letter and get sum
