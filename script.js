@@ -4895,18 +4895,313 @@ const day22Solution = secondStrategyScore
 day22.innerText = day22Solution
 
 // Day 3
+const day31 = document.getElementById('day3-1')
 
 // 3-1
-const rucksackItemsRaw = `vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw`
-
+const rucksackItemsRaw = `
+vvMQnwwvrwWNfrtZJfppmSfJSmSg
+BzGqjlBqBBmztHNFzDHg
+llRCPlTPPqBjPhqhlBRBClhqWcTWrWNcMbQbdrdLccccrnvM
+wMhwbTWpQjbpWHMQppzTHhjtlCjPSSJCCtlqRlJVFJFt
+ggdvvnvDgdDmNcBrrcDntFRFqHJJtSJqvlVSRlJq
+fggNNffGmcBrmBfcDzzzpHbsGTpszwwTbp
+BPdPPBggrPtrpbtvPBBdgrFmhhQThGGlbbTZnzZQzZfn
+ccjWRJVNcTGmnWWFmh
+DMNmsMHwRNBrggdPDPdt
+TfsfHLQbBtBFQbQsBmPwwlnPGZFwwdwWFZZw
+MRpcvJMJVSMrVMpVSvhhnclwgWwDZgWgWgWglwcG
+GCzjRJjVjSSrvfNQtLmQNsQbjB
+FrSPFjtVvwsqSwcG
+hDHdWDngpgZTDgHzzHwNNqlwNvZJlGqcQGsl
+wDzLTDHgFffLtRft
+CnCJNVqvCBJBNZmfPcPMcFLVcwmd
+HgzjHFghSFtrLfwPchPM
+QDpjgDSQlHHlDQQRzRzsBRRvWnWvJvZnqWBJNF
+mGHcFPFqzPtcfPwDGVVpgLgSlgBl
+rCvddTrnsbDLVSDwjSjd
+QWhWQThswssMQMMMvhTzPqJzmzftHccJfHFhFm
+cPbNpLVFTPbbFrpTLQBzqqmgnnBhgLMM
+vvSwWCZCRZCDZtGwzdgWdQmzqgnQddJn
+vCltGltCGmRRmCvDjjtHFpbcFfbbfssbpNPpHFpH
+WLLQMWZLSPMPWmrwhnjhZZhpHJHljBDB
+csbtCfFgCftGljHwHcBnpnJR
+tsvgszNtfMwPzWqPrS
+NbDZrbrFQQqqQtQqQDtTcBvCLBLswsZhscCGBZ
+ljmWRzVRpbndMWmmfdsTsCBsGwTVVVCGCGws
+ffRpnllHRMfdWzdnmRNQNNSFQQFNbrFHHrNH
+LccGzWNjcvNLGTmHNsNLMlMwMpMPGlMCwFwDDGCw
+fZZtfrZgrfQSnnnSnJRCglHpCwwHwpglDClFMw
+SqJQnffJRnfQQVRhrQtrhnThcLhzNzHdTjhsTWzjdmcm
+QJQwJMSbtbRgMQMQVZpCZsrrhpZBwrLLvs
+qCNPGWdqhpphsWrB
+DcNPNnqjdGDqjmPGGJRFMQmgtlQmQJCSgb
+blTRbDnHRGGBwnGPCtFPWzVCDvFWtL
+pdSJprqhhZSdqSdZNhVzZWtzLVgVPvzjLzWv
+rrsqsmrMpPHlwTsRHn
+mbNhgbRSLmTwswFm
+vHjHBWMHBzMqWZVZBzHzcwwwdcFLcpLspdzwpwQd
+HfMWMfvjWtZHqWDlhSnnnJNnbhslDb
+lwsvPPnqlwwwsPcHTgqcRcSccmgQ
+CVWBWCFpFzWfFjWjhNSQJJmcVcHRZJNTSc
+zdhfzBtfLLtfFClbrDvsPvtPbnmv
+PntVQbDnQHcDVvhtbtDhcbPcFTrrNfjqmmPTTZqMLZZMjFZm
+lgJCpCFCSCGCpllWMfZqTNNZrMjrJTTM
+CSzSwgFlzsGBzQcQhsnnDbVdtc
+THzqvrVrWzhqhWwqhTbNNDRtFRmmpFDDVsFLLsdddF
+MbZSSScZSGCJCjZlCjdPmpRmFLDtctdmFRsp
+GfJQlnZjSMnllbJCQbClnZQrhNwwqhBzTNhrffqhqWhTqz
+BdBdmDZHFFbrHHStPSRtPCzSRNDS
+JGGpwqLJGMTLpLlMpqLhJtzCCSGQSPzNNczVVPVzSV
+WwpllfslqfhffLwhfJpJlqlwdBmZnrdFHBFBBmNHFsFmdZmn
+jZfQZnZfnbRfjCnfbSSmVpqmNmVpCqlhCqqPpP
+MdJMwMvvLDssLtFMsMtLDsvvDRmmmPhWzWzphpmqDVzPDWNp
+TsLdMrvRtLJtGdtGRRtFTBjSBrScnSZjnbcgQgHfnB
+RZfmlRlWJmWLLRscrslJqvvMdVwmddvPddQPVDdDwz
+GStFbFCbntbjNnjFhFvdHfhzHfzzQdMHwPdD
+BSGpFbbjbNjnNNFSbRsLlWqgrZrfRgsBlg
+ztHczmrmcNNzHsPSTwsPHSQPQT
+CFCRjlvbClCjBdPDFQdwBsqn
+llbRgjClJCVVMMCssfmNZWszrNgzGL
+mmFldllVlmtdWFvPPFBcSSBW
+DZzZGzZswQZHwQZjZzWWTSSvjSdvPvvWjJTS
+DpQQggwzZGdmbCldgVgf
+PJJvhqzVGbTFqzqbbGTlLmrtrZMnnZnntlJnrD
+fNwRcQBCRNddNgLtgDnttqrMMtlr
+RfRdNWQHcqHscdfRdGPFbFPpvpVWWzPzVS
+DRgjZRRDggTfjfRvwWzHGGHPWDswvv
+dhbmpcCmchgCpsGzWPdVGvWHwP
+hpMMMpCQMnChFgNRQffTRrSN
+gfqPCHWtPMMjCtffgjQWGLvGdZcdLLGZcLFGZBWG
+pJTDsnnnvBjnFwvj
+zJRpTbNrTSppRVblgbljMgMfCfbC
+fGrGwqggtbVmtzbf
+CTMjNQcJjJTBNCjMNZFNBcCZHbmWZHVLZDDWVtDzzbVmlV
+hMvTcNMFMhQjTTBFBNMhwpspwgnGtvtnSgdwrRpG
+RfFdqPdMMGPVgWmNVN
+QwrTsbnSsSQpwlSSbNNWDmGLVjjmLWwNVB
+rpcclTCprmZQSbprSTpRRRfqMfHHCHfhMhvFJM
+LnJJsMtLbzsPPVPJbrTBlTWlfRfqnTrrlr
+VDHVQNFGgNTrSjSBjq
+CHFHGmvDGdZZGCQZVDgDHVbwLLwtMwwmJLJbLPPMbczt
+qNNNBllFBzFjjzwGqGgLrWgrtQjdmmtQmQpp
+ZMHJCPhMZRsRCsCPsSJZLmQdQgrtQwQwQZwdWg
+CnMPbbRbsPhCnbfhMPRPllnFGqwTTFzTzNvBGBGc
+wZWlBFZQgBzTzpZwBlVpzWBWnNMmnMvMcMJMmLGnVmqLqGMq
+PdSDfJbCHsHHdJjsRRhjjPjmLqnnrLMLcrnLvdLMNccvGn
+tSJtSCtbJhDhtzlFQZlTZTFp
+TNqZDqmMDZNMFSGHjSGBRBdN
+CrrwVwsPjjBHddPf
+rpWggQVspQWcgtLwcHZZzDDMLDvvnnMzDM
+lWrWmPwmGlZwZjdLZLzV
+cFcDJhJnmqBqDCRpZzVLNsFLjLzdds
+qJchTDCBHDWglmrfWPHH
+RgLRnTJWnfHDcQQBfg
+bZpNwdwbdMvVPsHHJMQfSSfP
+mVbdNNdrbCzZbdZvbWTGrhqjTJtRWttRjq
+TMtqqBJLrwqrZPlHHGhGnlBhzv
+bFgNcpDRnpgggjCzvWDWhQhQWQHHvz
+jnnVgjcgcTZMJqJVtT
+dVSjmdHrfGPddrQgstFgzsQfsMFQ
+hvJJCCJDcCtwBVFQzzBD
+RWCnTvWTLRnJJLJllWhTLSprVdNZVGHGNGGnrdGSZH
+gvMSHFZtBBMBMFZHzjnqLsLGMCzRWWMn
+QJmDrhbNDbJfPQhDmQPRLszRlnjCzzWqrRnlsL
+PcJVhJbJJNcNDmfDmjJmbhTfBvpwVSdggtgvgSFZwgvtgpdZ
+PBClRHHClRlFljllZSBBBllppVGDLpZVVVsGpmGcNDpGLL
+MvNwnbMwccVsswDG
+MqnNbzMMrQfnqtttqfQWQQnRdCSHgHPglRFBRWlHjWRlCW
+lldwdfSBWphHBggZghFs
+DjDbDVRzDmLRzRLGJjPssrLZPhdshFHrssTZ
+mvddMzvmmDDvvwQqWftCfqWqfM
+gpTTwNWGWMSMgJjnvpvvJbJppn
+lQvmLFdfrQzRFctlrLdRLVPnhPPbVDPDfjnVbfhJjV
+FLFqccvmmtcQtrmQccRFLlRLSSWBSgTWNwsggqMBsqWGHMNG
+PjPtVQrPVjrVPLLDQVFLTTWWqbSZwRwzqwSbSbbbwFSq
+lBnGJBnfflRRNZwbqb
+HJMGgmfpRMHGGdgncJHLDjjtVDQctLCvQCjTtr
+VvmvjRGwRwvhmhRvvvVCCTTJjfWqfDMMcJlcCD
+NpNbPfpSnngZbbLMFJWTMlLFqJJDMD
+bNSfdSHQZgVQzwhhvRmQ
+MhmHcDhChhcPVMDPDPQdFhQHnbNpZbZnprnrmNnjNbsllbnp
+WWqGCWSCzsGbbGNgjN
+LzwqBLSvwJCLPVMVDLdhMP
+mNVLLffSLVWdZCcFZCZrSbGr
+glvcwszTlsRDrHQCZFCvGH
+gTBRlJnwhzgTgsTnggslsJRTpLNmjmNNcdVLdhfpLpdLVmLc
+pCgfDrDrgccfppmDnhHMGqGbpHHSqzGLlqHS
+tFtjQRPFFZRVNRcQGbLzLFMSGzSbWLqH
+QRNTZjvjTTwtwNfmcTgfnCgnnBhm
+hcPBhqPzqWPccHWHHWqnPdssPVfFFmZDnVDDms
+NSLNCTRQZndRmDfnRD
+QSGTGbjTSTJHBlbZZBbh
+dgcWgVgWdvZSbbRtjLRZZZ
+MMDPPfTnPTQrFDMpHzmmLztLnsszRtwbtS
+rDfDqfHTpCSJqlCCGq
+bjsgllstBbpNpslBpdBgqljgGwzJzDzwLGGrwLQQdJDwGhQh
+nncmnmHHnmWRWmPfJCnvPRMrzvDhZZLGQwhDLhhMzZZZ
+mffccVHRRPTTNlpNbNjJVslJ
+DgPstgPtgPNNcjQQrtPJJCRSZTwSGJZZCZCJGD
+dHVvpzdBBhVqzWqvhvHdzGSZlTRCSRJrwSSCwJCWGT
+zpvVVqMBrzqrhFBvjbNPcPLnjcQtMcnj
+gBcmTCFghhCCBnBhWWwFbwLdwHFMLMdp
+LVzlZzPPMMzWWrwH
+ljqjsGlZPPqqlVsPqDVqjQQctNTnRcNLtCNmmnRTRthBGG
+LPRrrBNNjLBRJNdrGPRBfBrLwFqmDbdbTbTgmmgwmttFwtmH
+QQcVvnQphlWsCQCCVpnvptTJgbtqwHDwbJtJHFsTHw
+ppcJVQvpvMVMCvQZQVVZCCSRZPSjNRRZBPPPPzLjSLGf
+MLtRnjQsRMJcDQJnSrsfqVVvGwbbbqgggg
+WBFCNlFFFhFBlCHbplFWdpWZfVqPPwqTGdqTGvwrPVvTqvTr
+HClCHzFzFBhmnjtQzMMSMnbD
+sVnMCsdlMRcMFBGz
+JvwwgrJDfgDmmggQrhNfhQQftjFrGRRtZFGBRZFHzjGcjrcj
+PBJJvgDPNllPddVCPl
+fmmRSnfnMnFSmMmmzTDSBFHtlJJqHJJqdHQdTCdtCCdt
+WggGpNVVgWdwwHQtlGlC
+hjbWppbLbLZLjVPPjPLSRRMvDlmSzDzBSnBFZf
+nVttMPnPLjnJLjcnPVCjJJLcssfggBNlffgcNsWTcGcgNsBF
+HQbwhmDrRrgFsWlQGNls
+pZdbGzGrGpVttPLttv
+LLbMrMHLDdWhmgbqqt
+jGSQZQTpQGVVRSlQMQRljZmgmJBSvggvBWhJmJWvddmt
+VjlQFGMVrFFrDrPw
+DZVDwGZlJlVlwZVDzNdqfjMDnjqzNnWf
+pmtpLRQFhSFpmpRgRtHNFznNdqWBjzWfnBjMWf
+rHRrhStppHdJcGJrrssCsV
+pgQqHwgPcPCddCjdWtdp
+VfZGVFfNVhZhzjjjLz
+fNNBBnGVNfBfRSRjBRQHJQTwJcJTgHPwTngr
+MZdlzWzthMgrwmGmqZNqNs
+VvJQJPVDBJQThwwNsRqsvRsHHm
+BDQQPTnDDBQQBVfTBQPdFctzzdtztMMtnhcWcd
+LjWjDShflZRRcZzfHH
+srNwQPBsrVRhNmRGHzmM
+rBdgQTrhdPndQTrsQQsrPwnTpLLCWDpSCLtCnvtSWpJjDCvl
+gSlvDwCvcmcTQTFtRMjWHFVVHwtj
+rbsphZZzBshGZssMffTVRFfFpWpfTH
+GZNhZBhPBzTPNLDcDlCDCJNmlg
+smZjGfvjbWWffQtf
+dwRrdlVdDdgDbNtgcgQSNStQ
+FdFVwdblFlzVrlwrTlndZHHZGhmLhhssjHhMjnjq
+QFvQVFLLgVrFLBVgGhTtllPvmHRRGbTm
+hDCCNCNCJNzWDZnqJDzSNCTnbRttHGRnccbPRtmmlmHc
+qJshNMCNdVFVfsLB
+FcLZZPFjdZcZMPcRjcRTgbpJlwbbTlmdTlGlwD
+nrrNrHWBNSWvBqvvrhBqzStrgGnnmbwsbbJbwwJnmwmgJTlD
+BCrrNvqWvSQPcCGZZRQQ
+vPwcJblJzJbJcJFcwBSvJNdWRLtdsddGWWddWRWsMF
+mDZmmDZDHVhfmjZgjVDfhTZHtsNptRsMntnWdsMnGtRntG
+mhQrQDDhgqTTNfhmVQVBrPlBczSJbbCbCCPPvb
+ZjbjLlbZjGqsgJTfHggrVvlB
+tFDRFRnMFnnWtDdMdDRhzHfTJhJhffHvHTBHTgcfJV
+nztDtdWzCCMSptSdFRRswZjsLbjwZmwqwGqpQV
+vnvmmVnmVbrBJlzgWQWVNFzNHV
+MwSjZhSwPjMwfDRzgWlNpWvHlgNNNP
+CfSZjSfftwZDChDRSnccnrvBbbGrtBvctr
+LCBRQRBQwRrCVLVWSrCSwCptzvhthvGGhdHzwppTTddv
+mFnJJmnmFFFfPLNNmqqNJDpGnGtbHTtHvhnHbzvHvpGv
+lMMPLqDmNMVSjjgMCS
+zzPzbLjHLjfQPQHwwjddFNsNSJjDMsdNMFsC
+BqqtmgDhcqdSFCdsqddF
+GtcmrvhgcZlvZtBhtVgrvrvtnWzDnQbfnwlfWWRHWbbwzHRL
+JfWHWZcMMdDLMPjRnCJjRbFgnblF
+ShtBTSmBhTtqtfmqSTNvmjVjnFbFnnlrlqgCnrFnVg
+vfzTTthppmdzPLHLWdGZ
+tdvrvGgGTSScnHcjcg
+zLLVfzPPcDZnPjSPpD
+LfffNFLNlNbJwrctthWqNdNq
+NdjJtfVNZnnFFdtfGfFNcvpbMDbzdcTbbzpvmcDR
+PHMSHCHHWrRCvzDzDChT
+BqPWSHwllSQWrLHQHPqlBBNfttZMjFQfjGtZtNjJJjnN
+CpZtMCMQQpCVWjMDVjPVQsWWqJJhbTcddPlfhTRqchcJblhh
+NwDSGNmGRccqNJfT
+SBSSmgrrgGHnvSzwGVWDCzMCpLZtMsstLM
+sbjHQsBlBQrrGjQjBqCRSnSCpnfngLnFhJngFfSP
+zHVctHDcZtdJffnPpcSpFn
+ZdwNMztdvzVdrqblvWsqHvBR
+jPdjFPSbVDMMbqZzQWzQ
+hFRrJlpprGhtlJGQzmCRmZBWQCHRQR
+vThNplJpNhltNNlvcGDvwVFgnPwvSgPSSfjS
+DhDTPQpTDmQbDQrrrWtWPJNNrrsJ
+qqGjgwCgVRjMSRwMMGRGqjwvsNJJBZtrstvNBvHWHJvL
+VqqgfjzfgfFGVjRggCGznhlbTpQchcshpdFlnDbn
+DpTQTBbCZQVJQZJjrFllGdlvMPlMLqGBGvLl
+hmnWHWWNzzmHsmWRlGGpdLgLHGlqvgqg
+RzcWRhRnRnfmswfwtzzRWrDTrrFCQTCpQpcCrjjQCp
+HLvpHvGcBTDFznvfqT
+hCPQbPZPbjSbwwjCPChSClJJfzqTggTFDfsJngDg
+StqmmZbdqrQmhQrrhZWcRcGBpBHWVcLctMWp
+dNnRNbRdbRJMBMBVVThn
+rNrsLNscFsCDjpwTMgBGWMGjJjWBVJ
+wNcLpqHNsCprsfLFsHwRvPSSPRZRtRQSqtQPmP
+PPhGfbthhBDVsTDtDqRR
+mCmSNmqpcqjjrCScWRsZDpHsDQRZQDZDss
+CcWzNmccrjjvqBGzzdPGnv
+SDRmCSFfcSFFcfDmDBFSCfdVJhpzZjNJTNzRTvjzjhzNjTtZ
+ngGsltrMWrblNpNTJJplJN
+PGGnGsWngrGLQHHtHHHgWsHSBLqqfLcqBdVdcCDDBFdCDm
+VPjGwhwVPhrnqhzJmQvQTQvmzBzw
+ZBDBRbLLdtfRLlddLlCLCZMgmFJQFDcvzMQmgMzzJJFJ
+LHLWltHlRZCtBVhVVHPjGSpphp
+JqhlhdnnmfRVVSpzWLjzVLGpvB
+stQtFTTrsZQPFQNNDtQgLzzSLvjvLGLBGSZGGWJv
+DDDFFgDPbTwbTTJMCMcbCqqmmRRCnb
+JbDWPDPPJJDMDjHPZHGbHGVZTBhrzBpdzszdTTphdNdWdrpv
+RmRRqllqffwFtqwLCsqTNvpCsqCNqvdN
+fmfLmStlnnfnRtfcnQbbjPjPPggZGVsMQMbb
+WJggvGDJSwWgSfgvfSMGqqQHBcPjcHChcQBCssDHCTTQ
+mlRnbrnbnltblwdnnpbLRdCCjCTHTjPTTsQcTrHHhCcj
+bFLbdmzRpvSwfFFNWN
+BHnDnQHnHMWLwzWPzD
+dmlZCrdqLZzZVZJM
+tRRtdlLCjLmqCRsrSLrvvRQNFQnbgRTQQNHTBbGQQh
+ZrQPQWCrJnPdQSNTmBJNTHGHJN
+zhFRfswjwhhsFttfsfvQftRtLTzmBTHGTBmzMLHHLmGHNTTS
+hQhwqVjQwsdggrZZCWVl
+VjfnQgVQjblChfjVJlbzLtrSLlTGtztHTtsTGH
+DDqWQDQMWmDwWNwcqdWvpSrtLpLsptMprMStstMz
+vQcddRdRvWcwWRmmmmddZmmfVnnngJJbZnCBnBhhFbhCgJ
+gVgDnnmJdQVdJJgtgDjBsBhsBSPRSRRSSwccSbSqwPcCPcSC
+HrQHlHFpQfTHzzWzwScPPCRfLbPSfCSR
+TTQlZNTzlZNMWvrZMlpnhnVtnDDnVNtVJnjmhg
+MCmmssFnZJcNNszfpvvrpvJzvwpp
+BRRRWQWbSRGGRTTtZHWSqTrvDfgfdfrrwrDgfbvfzfrd
+jRBhWRWTSRttQBZMNchNCsmFMchP
+GBDncllqcSlNFZWBFWPjHVbw
+LQphJlJzLCwPjHbpHZvV
+hzCMJLMzTsrdrszQCCCTCQCDlqqnNmggqfGmgdmGgcmSNt
+hFVVbqJsqhcnBRTRGBTh
+lwdDpmzdNznzZBgGRRjR
+HdmvNvSCmDmwNDFrMJMqJFCRfsbq
+ctnbTcFTnbwSSfrrMLRhpJLMRdpwdJJR
+vdGCVBmGVHPLBRWhpRLJJZ
+VmQPHqvsPdlQsVHDftnlFTbffnbttfTF
+LBJZHrhLThHddcMLVtcMcL
+CPMNFDDMpGqFjjSPDPDqdvmdtQgVQQcQWcQgQQsj
+DzFDFMRSFPSGTJJTJBwwRhBw
+dpldqlqlRppFTHpbjbnLRLVnnGfjtG
+NNJTcmhzvJQNgMJBwcGtjtGbttfhtsGGnhnt
+rzcwmgvcvrBNvvmMgvcBzwHPCTWWprqPHqTFWdPCWDTF
+BNllDRTNqDNvNDDLBcDvBCLVJrVdJdtrnrCHggtrdd
+mppFMFjpMFZQZQGjFCdgrCrCdrvVGtJJCC
+PZsQmfPphvPjSsjmPjfZllBwcNRDNcDqNNWbTclS
+fjqZBSDSDwwsQwCDND
+rrdMdjVWtTTPslsslFLTLCsJ
+rvPWbvcmHjmdPbHvrvBHgqRRgqHGgfZGfHRS
+ggTQgsgwFrTrggbMTvSdmjfCmmQDcmqjDjmc
+nLZnRhNZnnNHZhZVStCcDqjcqmjSjH
+RWGNnhzBnJJRRWNRBNZNLZhFMTFPvrTrTlsggPwSlFMWTw
+RNmnPRnLGcQmzBQpHHjTltjtlfgspbsq
+CZvCJwZMMCCMdFVcwJJsgTTHfsTlbfbgbT
+SSVFhWCZdSCcWCcWdrvhzmnnnLNGDRDNzzLNGz
+jPwfPwNfFpFNQpDjdMcjcrdddDHD
+tzsRsGRLzhLhvqvhHMlqqV
+LRBnRBGSnBSGsGSGmGtBJCmnNWZpPpTNPMwQMPNJFZTTNwWT
+PCrStRPSPvZQcZPvqvfjSRWFFNFJFLZTTJTTVZFFGLFF
+DlpBzBntHDzhlpGJVHLwTMFLVLTL
+gptBBdgzpsBbpQvvPQPRqrdcCC
+`
 const rucksackItemsArray = rucksackItemsRaw.split('\n')
 const matchedItemLetters = []
-console.log(rucksackItemsArray)
 
 const letterIterate = function (comp1, comp2) {
 	// convert both strings to arrays
@@ -4928,15 +5223,126 @@ const letterIterate = function (comp1, comp2) {
 		}
 	}
 
-rucksackItemsArray.forEach((elem) => {
-	//console.log(elem)
-	// get compartment size and strings
-	const compartmentSize = elem.length/2
-	const compartment1 = elem.slice(0, compartmentSize)
-	const compartment2 = elem.slice(compartmentSize)
-	// Find matching item between compartment 1 and 2
-	let matchedLetter = letterIterate(compartment1, compartment2)
-	matchedItemLetters.push(matchedLetter)
-	// TODO: create letter priority
-})
+function ruckCompSlice(ruckArray) {
+	ruckArray.forEach((elem) => {
+		// get compartment size and strings
+		const compartmentSize = elem.length/2
+		const compartment1 = elem.slice(0, compartmentSize)
+		const compartment2 = elem.slice(compartmentSize)
+		// Find matching item between compartment 1 and 2
+		let matchedLetter = letterIterate(compartment1, compartment2)
+		matchedItemLetters.push(matchedLetter)
+	})
+	// send to summing function
+	const sum = prioritySum(matchedItemLetters)
+	return sum
+}
 
+function itemPriority(item) {
+	let priority = 0
+	// for capitals, add 26 priority
+	const regexCaps = /[A-Z]/
+	// priority test
+	if (regexCaps.test(item)) {
+		priority = 26
+		item = item.toLowerCase()
+	} else {
+		priority = 0
+	}
+	switch(item) {
+		case 'a':
+			priority += 1
+			break
+		case 'b':
+			priority += 2
+			break
+		case 'c':
+			priority += 3
+			break
+		case 'd':
+			priority += 4
+			break	
+		case 'e':
+			priority += 5
+			break
+		case 'f':
+			priority += 6
+			break
+		case 'g':
+			priority += 7
+			break
+		case 'h':
+			priority += 8
+			break
+		case 'i':
+			priority += 9
+			break
+		case 'j':
+			priority += 10
+			break
+		case 'k':
+			priority += 11
+			break
+		case 'l':
+			priority += 12
+			break
+		case 'm':
+			priority += 13
+			break
+		case 'n':
+			priority += 14
+			break
+		case 'o':
+			priority += 15
+			break
+		case 'p':
+			priority += 16
+			break
+		case 'q':
+			priority += 17
+			break
+		case 'r':
+			priority += 18
+			break
+		case 's':
+			priority += 19
+			break
+		case 't':
+			priority += 20
+			break
+		case 'u':
+			priority += 21
+			break
+		case 'v':
+			priority += 22
+			break
+		case 'w':
+			priority += 23
+			break
+		case 'x':
+			priority += 24
+			break
+		case 'y':
+			priority += 25
+			break
+		case 'z':
+			priority += 26
+			break	
+	}
+	return priority
+}
+
+function prioritySum(ruckArray) {
+	const priorityArray = []
+	// convert leters into priorities
+	ruckArray.forEach((i) => {
+		const priority = itemPriority(i)
+		priorityArray.push(priority)
+	})
+	// add priorities
+	const sum = priorityArray.reduce((acc, curr) => acc + curr, 0)
+	return sum
+}
+
+const day31Solution = ruckCompSlice(rucksackItemsArray)
+day31.innerText = day31Solution
