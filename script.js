@@ -2267,7 +2267,7 @@ function sortNums(a, b) {
   return b - a;
 }
 
-// Day 1-1
+	// Day 1-1
 function splitCalorieCounter(calorieArrayStr) {
 	// For each elf calorie entry
 	calorieArrayStr.forEach((e) => {
@@ -2286,7 +2286,7 @@ function splitCalorieCounter(calorieArrayStr) {
 const day11Solution = splitCalorieCounter(elfCals)
 day11.innerText = day11Solution
 
-// Day 1-2
+	// Day 1-2
 function topThreeElfCals(sortedCalories) {
 	// get the last three calorie totals
 	const lastThreeElfs = sortedCalories.slice(-3)
@@ -2303,7 +2303,7 @@ day12.innerText = day12Solution
 const day21 = document.getElementById('day2-1')
 const day22 = document.getElementById('day2-2')
 
-// 2-1
+	// 2-1
 const rpsStrategyRaw = `B Y
 A Z
 A Z
@@ -4850,7 +4850,7 @@ rpsStrategyArray.forEach((e) => {
 const day21Solution = strategyScore
 day21.innerText = day21Solution
 
-// 2-2
+	// 2-2
 // Create second score counter
 // Opponent plays A = rock, B = paper, C = scissor
 // You play Rock = 1, Paper = 2, Scissor = 3
@@ -4897,7 +4897,7 @@ day22.innerText = day22Solution
 // Day 3
 const day31 = document.getElementById('day3-1')
 
-// 3-1
+	// 3-1
 const day3TestRaw = `
 vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -5210,6 +5210,13 @@ DlpBzBntHDzhlpGJVHLwTMFLVLTL
 gptBBdgzpsBbpQvvPQPRqrdcCC
 `
 const rucksackItemsArray = rucksackItemsRaw.split('\n')
+const day3TestArray = function (raw) {
+	const rawArray = raw.split('\n')
+	rawArray.forEach((e) => {
+		// TODO: Remove the item that is ''
+	})
+}
+ day3TestRaw.split('\n')
 const matchedItemLetters = []
 
 const letterIterate = function (comp1, comp2) {
@@ -5360,5 +5367,24 @@ day31.innerText = day31Solution
 
 // TODO: Day 3-2
 //divide arrays into groups of 3
+
+const splitArray = []
+function splitRuckItems(array) {
+	const trash = array.shift()
+	const arrayItemCount = 3
+	let arrayLength= array.length
+	const tempArray = array.map((e) => {
+		for (i = 0; i < arrayLength; i = i + 3) {
+			splitArray.push(array.slice(i, i + 3))
+		}
+		// if (itemCounter < arrayItemCount) {
+		// 	splitArray.push(array.slice(currentItem, currentItem + 2))
+		// 	itemCounter++
+		// }
+	})
+	console.log(splitArray, arrayLength)
+}
+
+const day32Solution = splitRuckItems(day3TestArray)
 //find the letter in common with each group (MUST be in all three)
 //find priorities of each letter and get sum
