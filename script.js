@@ -4897,7 +4897,9 @@ day22.innerText = day22Solution
 // Day 3
 const day31 = document.getElementById('day3-1')
 
-	// 3-1
+// 3-1
+
+//Raw data
 const day3TestRaw = `
 vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -4905,7 +4907,6 @@ PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw
-
 `
 const rucksackItemsRaw = `
 vvMQnwwvrwWNfrtZJfppmSfJSmSg
@@ -5209,16 +5210,12 @@ PCrStRPSPvZQcZPvqvfjSRWFFNFJFLZTTJTTVZFFGLFF
 DlpBzBntHDzhlpGJVHLwTMFLVLTL
 gptBBdgzpsBbpQvvPQPRqrdcCC
 `
+// Split raw data at newline
 const rucksackItemsArray = rucksackItemsRaw.split('\n')
-const day3TestArray = function (raw) {
-	const rawArray = raw.split('\n')
-	rawArray.forEach((e) => {
-		// TODO: Remove the item that is ''
-	})
-}
- day3TestRaw.split('\n')
-const matchedItemLetters = []
+const day3TestArray = day3TestRaw.split('\n')
 
+// Matched letters
+const matchedItemLetters = []
 const letterIterate = function (comp1, comp2) {
 	// convert both strings to arrays
 	comp1Arr = Array.from(comp1)
@@ -5367,24 +5364,54 @@ day31.innerText = day31Solution
 
 // TODO: Day 3-2
 //divide arrays into groups of 3
-
 const splitArray = []
 function splitRuckItems(array) {
-	const trash = array.shift()
+	let trash = array.shift()
+	trash = array.pop()
 	const arrayItemCount = 3
-	let arrayLength= array.length
-	const tempArray = array.map((e) => {
-		for (i = 0; i < arrayLength; i = i + 3) {
-			splitArray.push(array.slice(i, i + 3))
-		}
-		// if (itemCounter < arrayItemCount) {
-		// 	splitArray.push(array.slice(currentItem, currentItem + 2))
-		// 	itemCounter++
-		// }
-	})
-	console.log(splitArray, arrayLength)
+	let arrayLength= array.length - 2
+	for (i = 0; i < arrayLength; i = i + 3) {
+		splitArray.push(array.slice(i, i + 3))
+	}
+	return splitArray
 }
 
-const day32Solution = splitRuckItems(day3TestArray)
+//Find single char that occurs in all 3 arrays
+const badgeItems = []
+function compareThreeArrays(array) {
+	const splitArray = splitRuckItems(array)
+	console.log(splitArray)
+	// For each 3 array group
+	const arrayTrio = splitArray.forEach((elem) => {
+		// convert each string to an array
+		const packArr1 = Array.from(elem[0])
+		const packArr2 = Array.from(elem[1])
+		const packArr3 = Array.from(elem[2])
+		//console.log(packArr1, packArr2, packArr3)
+		// counter for packArr1
+		// TODO: TOO SLOW - NEED TO OPTIMIZE BEFORE TESTING
+		for (let c1=0; c1<packArr1.length; c1++) {
+			//counter for packArr2
+			for (let c2=0; c2<packArr2.length; c2++){
+				//check for matched letter
+				if (packArr1[c1] == packArr2[c2]) {
+					// see if this letter is in packArr3
+					if (packArr3.includes(packArr1[c1])) {
+						badgeItems.push(packArr1[c1])
+						console.log(badgeItems)
+					} 
+				}
+				c2 = 0
+			}
+		}
+	}) 
+	
+	// iterate through array 1, find matches in array 2
+	// for char that match array 1 & 2, iterate through array 3
+	// add matched letter to badgeItems array
+	// send to prioritySum function to get total 
+}
+
+const day32Solution = compareThreeArrays(day3TestArray)
 //find the letter in common with each group (MUST be in all three)
 //find priorities of each letter and get sum
