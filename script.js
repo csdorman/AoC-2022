@@ -4896,6 +4896,7 @@ day22.innerText = day22Solution
 
 // Day 3
 const day31 = document.getElementById('day3-1')
+const day32 = document.getElementById('day3-2')
 
 // 3-1
 
@@ -5390,28 +5391,34 @@ function compareThreeArrays(array) {
 		//console.log(packArr1, packArr2, packArr3)
 		// counter for packArr1
 		// TODO: TOO SLOW - NEED TO OPTIMIZE BEFORE TESTING
-		for (let c1=0; c1<packArr1.length; c1++) {
-			//counter for packArr2
-			for (let c2=0; c2<packArr2.length; c2++){
-				//check for matched letter
+		for (let c1 = 0; c1 < packArr1.length; c1++) {
+			for (let c2 = 0; c2< packArr2.length; c2++){
 				if (packArr1[c1] == packArr2[c2]) {
-					// see if this letter is in packArr3
-					if (packArr3.includes(packArr1[c1])) {
-						badgeItems.push(packArr1[c1])
-						console.log(badgeItems)
+					//console.log(packArr1[c1], packArr2[c2])
+					for (let c3 = 0; c3 < packArr3.length; c3++) {
+						if (packArr1[c1] == packArr3[c3]) {
+							badgeItems.push(packArr3[c3])
+							console.log(badgeItems)
+							c3 = 0
+							c2 = 0
+							c1++
+							return
+						} 
 					} 
-				}
-				c2 = 0
-			}
+				} 
+			} c2 = 0
 		}
 	}) 
-	
+	const sum = prioritySum(badgeItems)
+	console.log(sum)
+	return sum
 	// iterate through array 1, find matches in array 2
 	// for char that match array 1 & 2, iterate through array 3
 	// add matched letter to badgeItems array
 	// send to prioritySum function to get total 
 }
 
-const day32Solution = compareThreeArrays(day3TestArray)
+const day32Solution = compareThreeArrays(rucksackItemsArray)
+day32.innerText = day32Solution
 //find the letter in common with each group (MUST be in all three)
 //find priorities of each letter and get sum
