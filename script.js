@@ -6439,7 +6439,7 @@ assignmentCompare(day41Data)
 const containmentCounter = 0
 function assignmentCompare(array) {
 	array.forEach((e) => {
-		//find location of commas and dash for each set
+		//find location of comma and dashes for each set
 		const commaLocation = e.indexOf(comma)
 		const firstDash = e.indexOf(dash)
 		const lastDash = e.lastIndexOf(dash)
