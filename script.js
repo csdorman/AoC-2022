@@ -5363,7 +5363,6 @@ day31.innerText = day31Solution
 
 // 3-2
 
-// TODO: Day 3-2
 //divide arrays into groups of 3
 const splitArray = []
 function splitRuckItems(array) {
@@ -5381,24 +5380,21 @@ function splitRuckItems(array) {
 const badgeItems = []
 function compareThreeArrays(array) {
 	const splitArray = splitRuckItems(array)
-	console.log(splitArray)
 	// For each 3 array group
 	const arrayTrio = splitArray.forEach((elem) => {
 		// convert each string to an array
 		const packArr1 = Array.from(elem[0])
 		const packArr2 = Array.from(elem[1])
 		const packArr3 = Array.from(elem[2])
-		//console.log(packArr1, packArr2, packArr3)
-		// counter for packArr1
-		// TODO: TOO SLOW - NEED TO OPTIMIZE BEFORE TESTING
+		// iterate through array 1, find matches in array 2
 		for (let c1 = 0; c1 < packArr1.length; c1++) {
 			for (let c2 = 0; c2< packArr2.length; c2++){
 				if (packArr1[c1] == packArr2[c2]) {
-					//console.log(packArr1[c1], packArr2[c2])
+					// for char that match array 1 & 2, iterate through array 3
 					for (let c3 = 0; c3 < packArr3.length; c3++) {
 						if (packArr1[c1] == packArr3[c3]) {
+							// add matched letter to badgeItems array
 							badgeItems.push(packArr3[c3])
-							console.log(badgeItems)
 							c3 = 0
 							c2 = 0
 							c1++
@@ -5408,17 +5404,13 @@ function compareThreeArrays(array) {
 				} 
 			} c2 = 0
 		}
-	}) 
-	const sum = prioritySum(badgeItems)
-	console.log(sum)
-	return sum
-	// iterate through array 1, find matches in array 2
-	// for char that match array 1 & 2, iterate through array 3
-	// add matched letter to badgeItems array
+	})
 	// send to prioritySum function to get total 
+	const sum = prioritySum(badgeItems)
+	return sum
 }
 
 const day32Solution = compareThreeArrays(rucksackItemsArray)
 day32.innerText = day32Solution
-//find the letter in common with each group (MUST be in all three)
-//find priorities of each letter and get sum
+
+// Day 4
