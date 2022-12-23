@@ -6422,7 +6422,7 @@ day4DataRaw = `8-17,16-49
 42-83,78-79
 5-17,4-67`
 
-const day41Data = day4TestRaw.split('\n')
+const day41Data = day4DataRaw.split('\n')
 console.log(day41Data)
 
 //separate data by \n
@@ -6434,17 +6434,29 @@ console.log(day41Data)
 const comma = ','
 const dash = '-'
 
-assignmentCompare(day41Data)
+const cleaningOverlapPairs = assignmentCompare(day41Data)
 
-const containmentCounter = 0
 function assignmentCompare(array) {
+	let containmentCounter = 0
 	array.forEach((e) => {
 		//find location of comma and dashes for each set
 		const commaLocation = e.indexOf(comma)
 		const firstDash = e.indexOf(dash)
 		const lastDash = e.lastIndexOf(dash)
-		//TODO: get start and end for set 1
+		//Get start and end for both elves
+		const elf1Start = parseInt(e.substring(0, firstDash)) 
+		const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
+		const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
+		const elf2End = parseInt(e.substring(lastDash + 1))
+		//Compare elf1 start and finish to elf 2 start and finish
+		if (elf1Start <= elf2Start && elf1End >= elf2End) {
+			containmentCounter++
+		} else if (elf2Start <= elf1Start && elf2End >= elf1End) {
+			containmentCounter++ 
+		}
+		console.log('Elf 1:', elf1Start, elf1End, 'Elf 2:', elf2Start, elf2End, containmentCounter)
 	})
-
+	return containmentCounter
 }
+console.log(cleaningOverlapPairs)
 
