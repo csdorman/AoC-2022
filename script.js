@@ -6429,9 +6429,7 @@ console.log(day41Data)
 const comma = ','
 const dash = '-'
 
-function assignmentCompare(array) {
-	let containmentCounter = 0
-	array.forEach((e) => {
+function splitAssignmentStrings(e) {
 		//find location of comma and dashes for each set
 		const commaLocation = e.indexOf(comma)
 		const firstDash = e.indexOf(dash)
@@ -6441,6 +6439,25 @@ function assignmentCompare(array) {
 		const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
 		const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
 		const elf2End = parseInt(e.substring(lastDash + 1))
+		//console.log(elf1Start, elf1End, elf2Start, elf2End)
+		return elf1Start, elf1End, elf2Start, elf2End
+}
+
+function assignmentCompare(array) {
+	let containmentCounter = 0
+	let elf1Start = elf1End = elf2Start = elf2End = 0
+	array.forEach((e) => {
+		const commaLocation = e.indexOf(comma)
+		const firstDash = e.indexOf(dash)
+		const lastDash = e.lastIndexOf(dash)
+		//Get start and end for both elves
+		const elf1Start = parseInt(e.substring(0, firstDash)) 
+		const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
+		const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
+		const elf2End = parseInt(e.substring(lastDash + 1))
+		//return elf1Start, elf1End, elf2Start, elf2End
+		//splitAssignmentStrings(e)
+		//console.log(elf1Start, elf1End, elf2Start, elf2End)
 		//Compare elf1 start and finish to elf 2 start and finish
 		if (elf1Start <= elf2Start && elf1End >= elf2End) {
 			containmentCounter++
@@ -6455,3 +6472,11 @@ const day41 = document.getElementById('day4-1')
 const day41Solution = assignmentCompare(day41Data)
 day41.innerText = day41Solution
 
+// Day 4-2
+
+function anyOverlapCompare(array) {
+	let overlapCounter = 0
+	array.forEach((e) => {
+		//TODO: (Re)create the number separating functionality (should make this into a separate function)
+	})
+}
