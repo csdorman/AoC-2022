@@ -5414,6 +5414,7 @@ const day32Solution = compareThreeArrays(rucksackItemsArray)
 day32.innerText = day32Solution
 
 // Day 4
+
 day4TestRaw = `2-4,6-8
 2-3,4-5
 5-7,7-9
@@ -6424,17 +6425,9 @@ day4DataRaw = `8-17,16-49
 
 const day41Data = day4DataRaw.split('\n')
 console.log(day41Data)
-
-//separate data by \n
-// for each line of data
-	// get start and end number of set 1
-	// get start and end number of set 2
-	// if start <= AND end >= add 1 to a counter
-
+// Separators for assignment array
 const comma = ','
 const dash = '-'
-
-const cleaningOverlapPairs = assignmentCompare(day41Data)
 
 function assignmentCompare(array) {
 	let containmentCounter = 0
@@ -6454,9 +6447,11 @@ function assignmentCompare(array) {
 		} else if (elf2Start <= elf1Start && elf2End >= elf1End) {
 			containmentCounter++ 
 		}
-		console.log('Elf 1:', elf1Start, elf1End, 'Elf 2:', elf2Start, elf2End, containmentCounter)
 	})
 	return containmentCounter
 }
-console.log(cleaningOverlapPairs)
+// Output Day 4-1
+const day41 = document.getElementById('day4-1')
+const day41Solution = assignmentCompare(day41Data)
+day41.innerText = day41Solution
 
