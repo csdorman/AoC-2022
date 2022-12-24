@@ -6462,9 +6462,18 @@ day41.innerText = day41Solution(day41Data)
 
 // Day 4-2
 
-function anyOverlapCompare(array) {
+const day42Solution = function(array) {
 	let overlapCounter = 0
 	array.forEach((e) => {
-		//TODO: (Re)create the number separating functionality (should make this into a separate function)
+		const elfAssignments = splitAssignmentStrings(e)
+		if (elfAssignments[0] >= elfAssignments[2] && elfAssignments[0] <= elfAssignments[3]) {
+			overlapCounter++
+		} else if (elfAssignments[2] >= elfAssignments[0] && elfAssignments[2] <= elfAssignments[1]) {
+			overlapCounter++
+		}
 	})
+	return overlapCounter
 }
+// Output Day 4-2
+const day42 = document.getElementById('day4-2')
+day42.innerText = day42Solution(day41Data)
