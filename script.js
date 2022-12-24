@@ -6438,13 +6438,11 @@ const day41Solution = function(array) {
 		} else if (elfAssignments[2] <= elfAssignments[0] && elfAssignments[3] >= elfAssignments[1]) {
 			containmentCounter++
 		}
-		console.log(elfAssignments, containmentCounter)
 	})
 	return containmentCounter
 }
 
 function splitAssignmentStrings(e) {
-	console.log("split assignment str", e)
 	//Get location of comma and dashes
 	const commaLocation = e.indexOf(comma)
 	const firstDash = e.indexOf(dash)
