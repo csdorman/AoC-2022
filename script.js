@@ -6424,53 +6424,43 @@ day4DataRaw = `8-17,16-49
 5-17,4-67`
 
 const day41Data = day4DataRaw.split('\n')
-console.log(day41Data)
+//console.log(day41Data)
 // Separators for assignment array
 const comma = ','
 const dash = '-'
 
-function splitAssignmentStrings(e) {
-		//find location of comma and dashes for each set
-		const commaLocation = e.indexOf(comma)
-		const firstDash = e.indexOf(dash)
-		const lastDash = e.lastIndexOf(dash)
-		//Get start and end for both elves
-		const elf1Start = parseInt(e.substring(0, firstDash)) 
-		const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
-		const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
-		const elf2End = parseInt(e.substring(lastDash + 1))
-		//console.log(elf1Start, elf1End, elf2Start, elf2End)
-		return elf1Start, elf1End, elf2Start, elf2End
-}
-
-function assignmentCompare(array) {
+const day41Solution = function(array) {
 	let containmentCounter = 0
-	let elf1Start = elf1End = elf2Start = elf2End = 0
 	array.forEach((e) => {
-		const commaLocation = e.indexOf(comma)
-		const firstDash = e.indexOf(dash)
-		const lastDash = e.lastIndexOf(dash)
-		//Get start and end for both elves
-		const elf1Start = parseInt(e.substring(0, firstDash)) 
-		const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
-		const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
-		const elf2End = parseInt(e.substring(lastDash + 1))
-		//return elf1Start, elf1End, elf2Start, elf2End
-		//splitAssignmentStrings(e)
-		//console.log(elf1Start, elf1End, elf2Start, elf2End)
-		//Compare elf1 start and finish to elf 2 start and finish
-		if (elf1Start <= elf2Start && elf1End >= elf2End) {
+		const elfAssignments = splitAssignmentStrings(e)
+		if (elfAssignments[0] <= elfAssignments[2] && elfAssignments[1] >= elfAssignments[3]) {
 			containmentCounter++
-		} else if (elf2Start <= elf1Start && elf2End >= elf1End) {
-			containmentCounter++ 
+		} else if (elfAssignments[2] <= elfAssignments[0] && elfAssignments[3] >= elfAssignments[1]) {
+			containmentCounter++
 		}
+		console.log(elfAssignments, containmentCounter)
 	})
 	return containmentCounter
 }
+
+function splitAssignmentStrings(e) {
+	console.log("split assignment str", e)
+	//Get location of comma and dashes
+	const commaLocation = e.indexOf(comma)
+	const firstDash = e.indexOf(dash)
+	const lastDash = e.lastIndexOf(dash)	
+	//Get start and end for both elves
+	const elf1Start = parseInt(e.substring(0, firstDash)) 
+	const elf1End = parseInt(e.substring(firstDash + 1, commaLocation))
+	const elf2Start = parseInt(e.substring(commaLocation + 1, lastDash))
+	const elf2End = parseInt(e.substring(lastDash + 1))
+	const elfAssignments = new Array(elf1Start, elf1End, elf2Start, elf2End)
+	return elfAssignments
+}
+
 // Output Day 4-1
 const day41 = document.getElementById('day4-1')
-const day41Solution = assignmentCompare(day41Data)
-day41.innerText = day41Solution
+day41.innerText = day41Solution(day41Data)
 
 // Day 4-2
 
