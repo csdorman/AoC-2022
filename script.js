@@ -6477,3 +6477,23 @@ const day42Solution = function(array) {
 // Output Day 4-2
 const day42 = document.getElementById('day4-2')
 day42.innerText = day42Solution(day41Data)
+
+// Day 5
+
+const day5TestRaw = `    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2`
+
+const day5Split = day5TestRaw.split('\n\n')
+
+const day5Data = day5Split[0]
+const day5Moves = day5Split[1]
+
+console.log(day5Data)
+console.log(day5Moves)
