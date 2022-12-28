@@ -6491,8 +6491,25 @@ move 2 from 2 to 1
 move 1 from 1 to 2`
 // Split raw data into crate and instructions
 const day5Split = day5TestRaw.split('\n\n')
-const day5Data = day5Split[0]
+
+const day5Data = day5DataParser(day5Split[0])
 const day5Moves = day5Split[1]
+
+function day5DataParser(string) {
+	const blankRegex = /\[\w\]/
+	const numberRegex = /\d/
+	for (i = 0; i < string.length; i = i + 4) {
+		let start = i
+		let end = i + 4
+		if (blankRegex.test(string.substring(start,end))) {
+			console.log(string.substring(start,end))
+		} else if (numberRegex.test(string.substring(start,end))){
+			console.log("Reached number")
+		} else {
+			console.log('')
+		}
+	}
+}
 
 console.log(day5Data)
 console.log(day5Moves)
