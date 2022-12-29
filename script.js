@@ -6480,6 +6480,12 @@ day42.innerText = day42Solution(day41Data)
 
 // Day 5
 
+// Arrays for each column
+const arrayCol1 = []
+const arrayCol2	= []
+const arrayCol3 = []
+let counter = 1
+
 const day5TestRaw = `    [D]    
 [N] [C]    
 [Z] [M] [P]
@@ -6495,6 +6501,21 @@ const day5Split = day5TestRaw.split('\n\n')
 const day5Data = day5DataParser(day5Split[0])
 const day5Moves = day5Split[1]
 
+// Sort the boxes into the appropriate array
+function columnCounter(data) {
+	data = data.trim()
+	if (counter == 1) {
+		arrayCol1.push(data)
+		counter ++
+	} else if (counter == 2) {
+		arrayCol2.push(data)
+		counter ++
+	} else if (counter == 3) {
+		arrayCol3.push(data)
+		counter = 1
+	} 
+}
+
 function day5DataParser(string) {
 	const blankRegex = /\[\w\]/
 	const numberRegex = /\d/
@@ -6503,13 +6524,19 @@ function day5DataParser(string) {
 		let end = i + 4
 		if (blankRegex.test(string.substring(start,end))) {
 			console.log(string.substring(start,end))
+			columnCounter(string.substring(start,end))
 		} else if (numberRegex.test(string.substring(start,end))){
 			console.log("Reached number")
+			continue
 		} else {
 			console.log('')
+			columnCounter('')
 		}
 	}
 }
 
 console.log(day5Data)
-console.log(day5Moves)
+console.log(arrayCol1)
+console.log(arrayCol2)
+console.log(arrayCol3)
+//console.log(day5Moves)
