@@ -6499,7 +6499,7 @@ move 1 from 1 to 2`
 const day5Split = day5TestRaw.split('\n\n')
 
 const day5Data = day5DataParser(day5Split[0])
-const day5Moves = day5Split[1]
+const day5Moves = day5MoveParser(day5Split[1])
 
 // Sort the boxes into the appropriate array
 function columnCounter(data) {
@@ -6516,6 +6516,7 @@ function columnCounter(data) {
 	} 
 }
 
+// Parsing data for day 5 - send to appropriate functions
 function day5DataParser(string) {
 	const blankRegex = /\[\w\]/
 	const numberRegex = /\d/
@@ -6523,20 +6524,37 @@ function day5DataParser(string) {
 		let start = i
 		let end = i + 4
 		if (blankRegex.test(string.substring(start,end))) {
-			console.log(string.substring(start,end))
 			columnCounter(string.substring(start,end))
 		} else if (numberRegex.test(string.substring(start,end))){
-			console.log("Reached number")
+			//console.log("Reached number")
 			continue
 		} else {
-			console.log('')
 			columnCounter('')
 		}
 	}
 }
 
-console.log(day5Data)
-console.log(arrayCol1)
-console.log(arrayCol2)
-console.log(arrayCol3)
-//console.log(day5Moves)
+function day5MoveParser(string){
+	const moveArray = string.split('\n')
+	const spaceRegex = /\s/
+	const numberRegex = /\d/
+	moveArray.forEach((line) => {
+		let fromArray = ''
+		let cratesToMove = ''
+		let toArray = ''
+		const splitLine = line.split(spaceRegex)
+		cratesToMove = splitLine[1]
+		fromArray = splitLine[3]
+		toArray = splitLine[5]
+	})
+	return moveArray
+}
+
+function day5CrateMover(cratesToMove, fromArray, toArray) {
+	
+}
+
+console.log(day5Moves)
+// console.log(arrayCol1)
+// console.log(arrayCol2)
+// console.log(arrayCol3)
