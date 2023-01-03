@@ -6485,6 +6485,8 @@ const arrayCol1 = []
 const arrayCol2	= []
 const arrayCol3 = []
 let counter = 1
+const boxRegex = /\[\w\]/
+const numberRegex = /\d/
 
 const day5TestRaw = `    [D]    
 [N] [C]    
@@ -6518,12 +6520,10 @@ function columnCounter(data) {
 
 // Parsing data for day 5 - send to appropriate functions
 function day5DataParser(string) {
-	const blankRegex = /\[\w\]/
-	const numberRegex = /\d/
 	for (i = 0; i < string.length; i = i + 4) {
 		let start = i
 		let end = i + 4
-		if (blankRegex.test(string.substring(start,end))) {
+		if (boxRegex.test(string.substring(start,end))) {
 			columnCounter(string.substring(start,end))
 		} else if (numberRegex.test(string.substring(start,end))){
 			//console.log("Reached number")
@@ -6546,15 +6546,19 @@ function day5MoveParser(string){
 		cratesToMove = splitLine[1]
 		fromArray = splitLine[3]
 		toArray = splitLine[5]
+		day5CrateMover(fromArray, cratesToMove, toArray)
+		console.log(fromArray,cratesToMove, toArray)
 	})
 	return moveArray
 }
 
 function day5CrateMover(cratesToMove, fromArray, toArray) {
-	
+	// TODO: Create a "master array" with all the arrayCol in a single deep array.
+	// Once that is done, the following should be easier
+	// let movedBox = arrayCol[fromArray].shift
+	// arrayCol[toArray].unshift
+	// console.log(arrayCol[fromArray], arrayCol[toArray])
 }
 
 console.log(day5Moves)
-// console.log(arrayCol1)
-// console.log(arrayCol2)
-// console.log(arrayCol3)
+console.log(arrayCol1, arrayCol2, arrayCol3)
