@@ -6484,6 +6484,7 @@ day42.innerText = day42Solution(day41Data)
 const arrayCol1 = []
 const arrayCol2	= []
 const arrayCol3 = []
+let arrayCols 
 let counter = 1
 const boxRegex = /\[\w\]/
 const numberRegex = /\d/
@@ -6503,6 +6504,12 @@ const day5Split = day5TestRaw.split('\n\n')
 const day5Data = day5DataParser(day5Split[0])
 const day5Moves = day5MoveParser(day5Split[1])
 
+// Get the number of columns
+function findNumberOfCols(rowLength) {
+	arrayCols = (rowLength.indexOf('\n') + 1) / 4
+	console.log("# of rows", arrayCols)
+}
+
 // Sort the boxes into the appropriate array
 function columnCounter(data) {
 	data = data.trim()
@@ -6520,6 +6527,8 @@ function columnCounter(data) {
 
 // Parsing data for day 5 - send to appropriate functions
 function day5DataParser(string) {
+	findNumberOfCols(string)
+	console.log("string length", string.indexOf('\n'))
 	for (i = 0; i < string.length; i = i + 4) {
 		let start = i
 		let end = i + 4
