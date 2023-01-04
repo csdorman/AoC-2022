@@ -6481,9 +6481,7 @@ day42.innerText = day42Solution(day41Data)
 // Day 5
 
 // Arrays for each column
-const arrayCol1 = []
-const arrayCol2	= []
-const arrayCol3 = []
+let boxPositions = []
 let arrayCols 
 let counter = 1
 const boxRegex = /\[\w\]/
@@ -6507,28 +6505,40 @@ const day5Moves = day5MoveParser(day5Split[1])
 // Get the number of columns
 function findNumberOfCols(rowLength) {
 	arrayCols = (rowLength.indexOf('\n') + 1) / 4
-	console.log("# of rows", arrayCols)
+	e = 0
+	while (e < arrayCols) {
+		boxPositions[e] = []
+		e++
+	}
+	console.log("Box array", boxPositions)
 }
 
 // Sort the boxes into the appropriate array
 function columnCounter(data) {
 	data = data.trim()
-	if (counter == 1) {
-		arrayCol1.push(data)
+	while (counter <= arrayCols) {
+		let count = counter
+		console.log(typeof counter, typeof boxPositions)
+		//TODO: WHY ISN'T THIS WORKING
+		boxPositions[count].push(data)
 		counter ++
-	} else if (counter == 2) {
-		arrayCol2.push(data)
-		counter ++
-	} else if (counter == 3) {
-		arrayCol3.push(data)
-		counter = 1
-	} 
+		continue
+	} counter = 1 
+	// if (counter == 1) {
+	// 	arrayCol1.push(data)
+	// 	counter ++
+	// } else if (counter == 2) {
+	// 	arrayCol2.push(data)
+	// 	counter ++
+	// } else if (counter == 3) {
+	// 	arrayCol3.push(data)
+	// 	counter = 1
+	// } 
 }
 
 // Parsing data for day 5 - send to appropriate functions
 function day5DataParser(string) {
 	findNumberOfCols(string)
-	console.log("string length", string.indexOf('\n'))
 	for (i = 0; i < string.length; i = i + 4) {
 		let start = i
 		let end = i + 4
@@ -6562,7 +6572,6 @@ function day5MoveParser(string){
 }
 
 function day5CrateMover(cratesToMove, fromArray, toArray) {
-	// TODO: Create a "master array" with all the arrayCol in a single deep array.
 	// Once that is done, the following should be easier
 	// let movedBox = arrayCol[fromArray].shift
 	// arrayCol[toArray].unshift
@@ -6570,4 +6579,4 @@ function day5CrateMover(cratesToMove, fromArray, toArray) {
 }
 
 console.log(day5Moves)
-console.log(arrayCol1, arrayCol2, arrayCol3)
+console.log(boxPositions)
