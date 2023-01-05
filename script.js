@@ -6550,21 +6550,25 @@ function day5MoveParser(string){
 		let cratesToMove = ''
 		let toArray = ''
 		const splitLine = line.split(spaceRegex)
-		cratesToMove = splitLine[1]
-		fromArray = splitLine[3]
-		toArray = splitLine[5]
+		cratesToMove = Number.parseInt(splitLine[1])
+		fromArray = Number.parseInt(splitLine[3])
+		toArray = Number.parseInt(splitLine[5])
 		day5CrateMover(fromArray, cratesToMove, toArray)
 		console.log(fromArray,cratesToMove, toArray)
 	})
 	return moveArray
 }
 
-function day5CrateMover(cratesToMove, fromArray, toArray) {
-	// Once that is done, the following should be easier
-	// let movedBox = arrayCol[fromArray].shift
-	// arrayCol[toArray].unshift
-	// console.log(arrayCol[fromArray], arrayCol[toArray])
+// Sort the crates
+function day5CrateMover(fromArray, cratesToMove, toArray) {
+	console.log("from", fromArray, "to", toArray, "move", boxPositions[fromArray])
+	let movedBox = boxPositions[fromArray].shift()
+	//TODO Need to test to make sure movedBox is NOT an empty string ('')
+	console.log("movedBox", movedBox)
+	boxPositions[toArray].unshift(movedBox)
+	console.log(boxPositions[fromArray], boxPositions[toArray])
 }
 
-console.log(day5Moves)
-console.log(boxPositions)
+console.log("Day 5 moves", day5Moves)
+console.log("Box position array", boxPositions)
+// console.log(day5CrateMover)
