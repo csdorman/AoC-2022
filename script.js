@@ -6483,7 +6483,7 @@ day42.innerText = day42Solution(day41Data)
 // Arrays for each column
 let boxPositions = []
 let arrayCols 
-let counter = 1
+let counter = 0
 const boxRegex = /\[\w\]/
 const numberRegex = /\d/
 
@@ -6510,30 +6510,19 @@ function findNumberOfCols(rowLength) {
 		boxPositions[e] = []
 		e++
 	}
-	console.log("Box array", boxPositions)
 }
 
 // Sort the boxes into the appropriate array
 function columnCounter(data) {
 	data = data.trim()
-	while (counter <= arrayCols) {
-		let count = counter
-		console.log(typeof counter, typeof boxPositions)
-		//TODO: WHY ISN'T THIS WORKING
-		boxPositions[count].push(data)
-		counter ++
-		continue
-	} counter = 1 
-	// if (counter == 1) {
-	// 	arrayCol1.push(data)
-	// 	counter ++
-	// } else if (counter == 2) {
-	// 	arrayCol2.push(data)
-	// 	counter ++
-	// } else if (counter == 3) {
-	// 	arrayCol3.push(data)
-	// 	counter = 1
-	// } 
+	if (counter < arrayCols) {
+		boxPositions[counter].push(data)
+		counter = counter +1
+	} else {
+		counter = 0
+		boxPositions[counter].push(data)
+		counter++
+	}
 }
 
 // Parsing data for day 5 - send to appropriate functions
@@ -6545,7 +6534,6 @@ function day5DataParser(string) {
 		if (boxRegex.test(string.substring(start,end))) {
 			columnCounter(string.substring(start,end))
 		} else if (numberRegex.test(string.substring(start,end))){
-			//console.log("Reached number")
 			continue
 		} else {
 			columnCounter('')
