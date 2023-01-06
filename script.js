@@ -6484,8 +6484,7 @@ day42.innerText = day42Solution(day41Data)
 let boxPositions = []
 let arrayCols 
 let counter = 0
-const boxRegex = /\[\w\]/
-const numberRegex = /\d/
+
 
 const day5TestRaw = `    [D]    
 [N] [C]    
@@ -6500,75 +6499,130 @@ move 1 from 1 to 2`
 const day5Split = day5TestRaw.split('\n\n')
 
 const day5Data = day5DataParser(day5Split[0])
-const day5Moves = day5MoveParser(day5Split[1])
+//const day5Moves = day5MoveParser(day5Split[1])
+
+// Test for Box
+function isBox(string) {
+	const boxRegex = /\[\w\]/
+	return boxRegex.test(string)
+}
+
+// Test for empty string
+function isEmptyString(string) {
+	const spaceRegex = /^$/
+	return spaceRegex.test(string)
+}
+
+// Test for whitespace
+function is4WhiteSpaces(string) {
+	const whiteSpaces = /\s{4}/
+	return whiteSpaces.test(string)
+}
+
+// Test for single number
+function isNumber(string) {
+	const numberRegex = /\d/
+	return numberRegex.test(string)
+}
 
 // Get the number of columns
-function findNumberOfCols(rowLength) {
-	arrayCols = (rowLength.indexOf('\n') + 1) / 4
-	e = 0
-	while (e < arrayCols) {
-		boxPositions[e] = []
-		e++
+function findNumberOfColumns(row) {
+	return (row.indexOf('\n') + 1) / 4
+}
+
+// Create an array inside boxPositions for each column
+function boxPositionArrays(num) {
+	for (i = 0; i < num; i++){
+		boxPositions[i] = []
 	}
 }
 
-// Sort the boxes into the appropriate array
-function columnCounter(data) {
-	data = data.trim()
-	if (counter < arrayCols) {
-		boxPositions[counter].push(data)
-		counter = counter +1
-	} else {
-		counter = 0
-		boxPositions[counter].push(data)
-		counter++
-	}
-}
-
-// Parsing data for day 5 - send to appropriate functions
-function day5DataParser(string) {
-	findNumberOfCols(string)
-	for (i = 0; i < string.length; i = i + 4) {
+// Sort boxes 
+function boxSorter(string) {
+	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
-		if (boxRegex.test(string.substring(start,end))) {
-			columnCounter(string.substring(start,end))
-		} else if (numberRegex.test(string.substring(start,end))){
-			continue
+		if (isBox(string.substring(start,end))) {
+			// send to a box 
+			console.log("isBox",string.substring(start,end))
+		} else if (is4WhiteSpaces(string.substring(start,end))) {
+			// send to a box (but delete it later)
+			console.log("isWhiteSpace", string.substring(start,end))
 		} else {
-			columnCounter('')
+			return
 		}
 	}
 }
 
-function day5MoveParser(string){
-	const moveArray = string.split('\n')
-	const spaceRegex = /\s/
-	const numberRegex = /\d/
-	moveArray.forEach((line) => {
-		let fromArray = ''
-		let cratesToMove = ''
-		let toArray = ''
-		const splitLine = line.split(spaceRegex)
-		cratesToMove = Number.parseInt(splitLine[1])
-		fromArray = Number.parseInt(splitLine[3])
-		toArray = Number.parseInt(splitLine[5])
-		day5CrateMover(fromArray, cratesToMove, toArray)
-		console.log(fromArray,cratesToMove, toArray)
-	})
-	return moveArray
+function day5DataParser(string) {
+	console.log(string)
+	arrayCols = findNumberOfColumns(string)
+	boxPositionArrays(arrayCols)
+	boxSorter(string)
+	//Continue refactor
+	//TODO: Recreate "columncounter" - sorting boxes in boxPosition array
 }
 
-// Sort the crates
-function day5CrateMover(fromArray, cratesToMove, toArray) {
-	console.log("from", fromArray, "to", toArray, "move", boxPositions[fromArray])
-	let movedBox = boxPositions[fromArray].shift()
-	//TODO Need to test to make sure movedBox is NOT an empty string ('')
-	console.log("movedBox", movedBox)
-	boxPositions[toArray].unshift(movedBox)
-	console.log(boxPositions[fromArray], boxPositions[toArray])
-}
 
-console.log("Day 5 moves", day5Moves)
-console.log("Box position array", boxPositions)
-// console.log(day5CrateMover)
+
+
+
+//---
+
+
+// // Sort the boxes into the appropriate array
+// function columnCounter(data) {
+// 	data = data.trim()
+// 	if (counter < arrayCols) {
+// 		boxPositions[counter].push(data)
+// 		counter = counter +1
+// 	} else {
+// 		counter = 0
+// 		boxPositions[counter].push(data)
+// 		counter++
+// 	}
+// }
+
+// // Parsing data for day 5 - send to appropriate functions
+// function day5DataParser(string) {
+// 	findNumberOfCols(string)
+// 	for (i = 0; i < string.length; i = i + 4) {
+// 		let start = i
+// 		let end = i + 4
+// 		if (isBox(string.substring(start,end))) {
+// 			columnCounter(string.substring(start,end))
+// 		} else if (isNumber(string.substring(start,end))){
+// 			continue
+// 		} else {
+// 			columnCounter('')
+// 		}
+// 	}
+// }
+
+// function day5MoveParser(string){
+// 	const moveArray = string.split('\n')
+// 	moveArray.forEach((line) => {
+// 		let fromArray = ''
+// 		let cratesToMove = ''
+// 		let toArray = ''
+// 		const splitLine = line.split('\n')
+// 		cratesToMove = Number.parseInt(splitLine[1])
+// 		fromArray = Number.parseInt(splitLine[3])
+// 		toArray = Number.parseInt(splitLine[5])
+// 		//day5CrateMover(fromArray, cratesToMove, toArray)
+// 		console.log(fromArray,cratesToMove, toArray)
+// 	})
+// 	return moveArray
+// }
+
+// // Sort the crates
+// function day5CrateMover(fromArray, cratesToMove, toArray) {
+// 	console.log("from", fromArray, "to", toArray, "move", boxPositions[fromArray])
+// 	//TODO Need to test to make sure movedBox is NOT an empty string ('')
+// 	console.log("movedBox", movedBox)
+// 	//boxPositions[toArray].unshift(movedBox)
+// 	console.log("Boxes in toArray/fromArray", boxPositions[fromArray], boxPositions[toArray])
+// }
+// console.log("Day 5 moves", day5Moves)
+// console.log("Box position array", boxPositions)
+// // console.log(day5CrateMover)
