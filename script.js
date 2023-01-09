@@ -6496,15 +6496,18 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2`
 // Split raw data into crate and instructions
-const day5Split = day5TestRaw.split('\n\n')
 
-const day5Data = day5DataParser(day5Split[0])
-//const day5Moves = day5MoveParser(day5Split[1])
 
+const day51Solution = day5DataParser(day5TestRaw)
 // Test for Box
 function isBox(string) {
 	const boxRegex = /\[\w\]/
 	return boxRegex.test(string)
+}
+
+function isEmptyBox(string) {
+	const emptyBoxRegex = /\[\]/
+	return emptyBoxRegex.test(string)
 }
 
 // Test for empty string
@@ -6537,37 +6540,65 @@ function boxPositionArrays(num) {
 	}
 }
 
-// Sort boxes 
+// Separate boxes from whitespaces
 function boxSorter(string) {
 	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
 		if (isBox(string.substring(start,end))) {
-			// send to a box 
-			console.log("isBox",string.substring(start,end))
+			columnCounter(string.substring(start,end))
 		} else if (is4WhiteSpaces(string.substring(start,end))) {
-			// send to a box (but delete it later)
-			console.log("isWhiteSpace", string.substring(start,end))
+			columnCounter('[]')
 		} else {
 			return
 		}
 	}
 }
 
-function day5DataParser(string) {
-	console.log(string)
-	arrayCols = findNumberOfColumns(string)
-	boxPositionArrays(arrayCols)
-	boxSorter(string)
-	//Continue refactor
-	//TODO: Recreate "columncounter" - sorting boxes in boxPosition array
+// Send boxes (or whitespace) to appropriate array
+function columnCounter(item) {
+	item = item.trim()
+	if (counter < 3) {
+		boxPositions[counter].push(item)
+		counter ++
+	} else {
+		counter = 0
+		boxPositions[counter].push(item)
+		counter ++
+	}
 }
 
+// Split moves into an array - one move per array item
+function day5MoveParser(string) {
+	//console.log('move parser initial', string)
+	const moveArray = string.split('\n')
+	console.log('move array', moveArray)
+}
 
+function splitStringsForMoves(string) {
+	console.log(string.split('\n'))
+}
 
+function day5BoxMover(string) {
+	const stringToMoves = splitStringsForMoves(string)
 
+}
 
-//---
+function day5DataParser(string) {
+	const day5Split = day5TestRaw.split('\n\n')
+	const day5Data = day5Split[0]
+	const day5Moves = day5Split[1]
+	//console.log('dataParser initial',string)
+	arrayCols = findNumberOfColumns(day5Data)
+	//console.log('ArrayCols', arrayCols)
+	boxPositionArrays(arrayCols)
+	//console.log('boxPositionArray before', boxPositions)
+	boxSorter(day5Data)
+	console.log('boxPositions', boxPositions)
+	day5MoveParser(day5Moves)
+	//Create Moving function - must make sure to keep track of "turns"
+}
+
 
 
 // // Sort the boxes into the appropriate array
