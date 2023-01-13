@@ -6548,7 +6548,7 @@ function boxSorter(string) {
 		if (isBox(string.substring(start,end))) {
 			columnCounter(string.substring(start,end))
 		} else if (is4WhiteSpaces(string.substring(start,end))) {
-			columnCounter('[]')
+			columnCounter(string.substring(start,end))
 		} else {
 			return
 		}
@@ -6557,10 +6557,17 @@ function boxSorter(string) {
 
 // Send boxes (or whitespace) to appropriate array
 function columnCounter(item) {
-	item = item.trim()
-	if (counter < 3) {
+	if (!is4WhiteSpaces(item)) {
+		 item = item.trim()
+	}
+	// Push valid box into boxPositions
+	if (counter < arrayCols && !is4WhiteSpaces(item)) {
 		boxPositions[counter].push(item)
 		counter ++
+	// If it's blank, don't push
+	} else if (counter < arrayCols && is4WhiteSpaces(item)) {
+		counter ++
+	// Reset the counter when you exceed the number of columns
 	} else {
 		counter = 0
 		boxPositions[counter].push(item)
@@ -6572,16 +6579,28 @@ function columnCounter(item) {
 function day5MoveParser(string) {
 	//console.log('move parser initial', string)
 	const moveArray = string.split('\n')
+	splitStringsForMoves(moveArray)
 	console.log('move array', moveArray)
 }
 
 function splitStringsForMoves(string) {
-	console.log(string.split('\n'))
+	string.forEach((move) => {
+		// Turn each line into an array
+		let lineArray = move.split(' ')
+		let cratesToMove = Number.parseInt(lineArray[1])
+		let fromArray = Number.parseInt(lineArray[3])
+		let toArray = Number.parseInt(lineArray[5])
+		console.log("Parsed move:", cratesToMove, fromArray, toArray)
+		// Send to move function here
+		day5BoxMover(cratesToMove, fromArray, toArray)
+	})
 }
 
-function day5BoxMover(string) {
-	const stringToMoves = splitStringsForMoves(string)
-
+function day5BoxMover(cratesToMove, fromArray, toArray) {
+	console.log(boxPositions)
+	// while (cratesToMove > 0) {
+		//TODO: Write move function		
+	// }
 }
 
 function day5DataParser(string) {
@@ -6589,14 +6608,18 @@ function day5DataParser(string) {
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
 	//console.log('dataParser initial',string)
+	// Get the number of columns of boxes
 	arrayCols = findNumberOfColumns(day5Data)
 	//console.log('ArrayCols', arrayCols)
+	// Create an array for each column of boxes
 	boxPositionArrays(arrayCols)
 	//console.log('boxPositionArray before', boxPositions)
+	// Sort each box (or empty string) into the boxPositionArray
 	boxSorter(day5Data)
 	console.log('boxPositions', boxPositions)
+	// Parse the move string
 	day5MoveParser(day5Moves)
-	//Create Moving function - must make sure to keep track of "turns"
+
 }
 
 
