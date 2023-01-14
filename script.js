@@ -6485,8 +6485,18 @@ let boxPositions = []
 let arrayCols 
 let counter = 0
 
+// Raw and real data
+const day5TestRaw = `    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
 
-const day5TestRaw = `        [G]         [D]     [Q]    
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
+`
+const day5DataRaw = `        [G]         [D]     [Q]    
 [P]     [T]         [L] [M] [Z]    
 [Z] [Z] [C]         [Z] [G] [W]    
 [M] [B] [F]         [P] [C] [H] [N]
@@ -7116,7 +7126,7 @@ function returnTopCrates(array) {
 }
 
 function day5DataParser(string) {
-	const day5Split = day5TestRaw.split('\n\n')
+	const day5Split = day5DataRaw.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
 	// Get the number of columns of boxes
