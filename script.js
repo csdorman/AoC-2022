@@ -6486,15 +6486,520 @@ let arrayCols
 let counter = 0
 
 
-const day5TestRaw = `    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
+const day5TestRaw = `        [G]         [D]     [Q]    
+[P]     [T]         [L] [M] [Z]    
+[Z] [Z] [C]         [Z] [G] [W]    
+[M] [B] [F]         [P] [C] [H] [N]
+[T] [S] [R]     [H] [W] [R] [L] [W]
+[R] [T] [Q] [Z] [R] [S] [Z] [F] [P]
+[C] [N] [H] [R] [N] [H] [D] [J] [Q]
+[N] [D] [M] [G] [Z] [F] [W] [S] [S]
+ 1   2   3   4   5   6   7   8   9 
 
-move 1 from 2 to 1
-move 3 from 1 to 3
+move 7 from 6 to 8
+move 5 from 2 to 6
+move 2 from 4 to 1
+move 1 from 4 to 5
+move 5 from 7 to 6
+move 7 from 6 to 3
+move 5 from 9 to 2
+move 6 from 2 to 3
+move 2 from 7 to 9
+move 20 from 3 to 1
+move 11 from 1 to 6
+move 1 from 9 to 8
+move 3 from 8 to 2
+move 8 from 1 to 5
+move 10 from 8 to 4
+move 7 from 6 to 4
+move 1 from 8 to 3
+move 8 from 1 to 7
+move 16 from 4 to 8
+move 1 from 9 to 8
+move 1 from 5 to 2
+move 4 from 7 to 4
+move 5 from 6 to 7
+move 1 from 6 to 1
+move 8 from 7 to 4
+move 1 from 6 to 9
+move 12 from 4 to 5
+move 3 from 2 to 5
+move 1 from 6 to 2
+move 1 from 3 to 7
+move 1 from 3 to 2
+move 1 from 9 to 3
+move 1 from 7 to 8
+move 1 from 7 to 5
+move 1 from 3 to 2
+move 4 from 5 to 7
+move 5 from 5 to 7
+move 1 from 4 to 3
+move 1 from 3 to 9
+move 3 from 1 to 8
+move 1 from 9 to 1
 move 2 from 2 to 1
-move 1 from 1 to 2`
+move 2 from 2 to 7
+move 8 from 8 to 1
+move 3 from 5 to 2
+move 8 from 7 to 5
+move 7 from 1 to 3
+move 3 from 1 to 7
+move 1 from 1 to 5
+move 1 from 3 to 7
+move 7 from 5 to 8
+move 2 from 2 to 8
+move 1 from 3 to 2
+move 1 from 2 to 4
+move 1 from 4 to 8
+move 13 from 8 to 1
+move 13 from 5 to 9
+move 2 from 5 to 2
+move 7 from 9 to 3
+move 12 from 8 to 3
+move 4 from 9 to 3
+move 1 from 3 to 4
+move 2 from 2 to 3
+move 1 from 1 to 6
+move 1 from 2 to 3
+move 1 from 5 to 9
+move 7 from 7 to 4
+move 10 from 1 to 8
+move 1 from 1 to 4
+move 1 from 9 to 5
+move 2 from 5 to 1
+move 1 from 6 to 5
+move 3 from 8 to 9
+move 5 from 4 to 3
+move 4 from 4 to 1
+move 7 from 1 to 6
+move 2 from 5 to 7
+move 35 from 3 to 4
+move 4 from 9 to 1
+move 19 from 4 to 8
+move 1 from 7 to 6
+move 1 from 9 to 2
+move 10 from 4 to 5
+move 2 from 4 to 7
+move 3 from 4 to 3
+move 1 from 2 to 8
+move 1 from 1 to 9
+move 3 from 3 to 6
+move 4 from 8 to 6
+move 4 from 5 to 2
+move 2 from 8 to 3
+move 3 from 5 to 9
+move 12 from 6 to 1
+move 8 from 8 to 6
+move 2 from 9 to 1
+move 1 from 4 to 1
+move 1 from 3 to 8
+move 3 from 7 to 8
+move 2 from 9 to 7
+move 1 from 6 to 7
+move 10 from 6 to 8
+move 4 from 2 to 5
+move 1 from 3 to 7
+move 7 from 5 to 7
+move 13 from 8 to 1
+move 29 from 1 to 4
+move 8 from 7 to 8
+move 1 from 1 to 3
+move 3 from 7 to 6
+move 1 from 1 to 9
+move 15 from 4 to 1
+move 1 from 3 to 6
+move 10 from 1 to 6
+move 10 from 6 to 7
+move 1 from 4 to 9
+move 1 from 9 to 1
+move 1 from 9 to 7
+move 6 from 7 to 8
+move 1 from 1 to 6
+move 5 from 6 to 5
+move 21 from 8 to 9
+move 5 from 1 to 9
+move 2 from 9 to 5
+move 3 from 5 to 6
+move 3 from 7 to 9
+move 4 from 4 to 6
+move 6 from 8 to 7
+move 6 from 6 to 3
+move 2 from 7 to 9
+move 1 from 7 to 2
+move 6 from 3 to 2
+move 1 from 6 to 4
+move 4 from 5 to 9
+move 1 from 4 to 5
+move 9 from 4 to 6
+move 7 from 6 to 4
+move 10 from 9 to 2
+move 5 from 7 to 5
+move 10 from 2 to 7
+move 2 from 5 to 4
+move 2 from 5 to 9
+move 4 from 9 to 4
+move 1 from 8 to 6
+move 7 from 7 to 2
+move 1 from 5 to 4
+move 2 from 7 to 1
+move 1 from 5 to 7
+move 3 from 6 to 2
+move 4 from 4 to 5
+move 1 from 2 to 7
+move 10 from 4 to 7
+move 3 from 7 to 3
+move 17 from 9 to 4
+move 1 from 1 to 4
+move 1 from 1 to 5
+move 5 from 2 to 7
+move 1 from 9 to 2
+move 5 from 4 to 8
+move 2 from 9 to 7
+move 4 from 8 to 1
+move 3 from 4 to 8
+move 1 from 2 to 5
+move 1 from 9 to 2
+move 6 from 4 to 8
+move 3 from 7 to 5
+move 1 from 4 to 9
+move 1 from 9 to 1
+move 3 from 1 to 9
+move 4 from 8 to 5
+move 2 from 9 to 8
+move 4 from 2 to 5
+move 8 from 7 to 2
+move 5 from 8 to 5
+move 2 from 7 to 8
+move 1 from 3 to 5
+move 1 from 1 to 2
+move 1 from 1 to 6
+move 2 from 3 to 6
+move 5 from 2 to 8
+move 4 from 7 to 1
+move 7 from 8 to 5
+move 1 from 1 to 5
+move 3 from 8 to 3
+move 1 from 9 to 3
+move 7 from 2 to 3
+move 2 from 2 to 8
+move 2 from 4 to 8
+move 1 from 8 to 5
+move 1 from 1 to 4
+move 2 from 4 to 7
+move 2 from 7 to 1
+move 3 from 2 to 3
+move 3 from 5 to 2
+move 1 from 8 to 3
+move 3 from 3 to 2
+move 5 from 2 to 1
+move 17 from 5 to 8
+move 9 from 8 to 1
+move 11 from 3 to 5
+move 8 from 8 to 5
+move 2 from 8 to 5
+move 16 from 1 to 4
+move 13 from 4 to 7
+move 6 from 5 to 2
+move 2 from 4 to 8
+move 5 from 7 to 9
+move 2 from 1 to 2
+move 7 from 7 to 1
+move 1 from 1 to 4
+move 1 from 9 to 8
+move 7 from 2 to 8
+move 1 from 4 to 7
+move 2 from 9 to 4
+move 1 from 4 to 1
+move 1 from 3 to 5
+move 2 from 9 to 8
+move 11 from 8 to 7
+move 2 from 6 to 5
+move 1 from 6 to 9
+move 1 from 1 to 9
+move 1 from 9 to 1
+move 4 from 1 to 4
+move 2 from 1 to 8
+move 1 from 1 to 2
+move 1 from 9 to 5
+move 2 from 4 to 3
+move 2 from 2 to 7
+move 2 from 3 to 9
+move 1 from 9 to 1
+move 1 from 9 to 1
+move 5 from 5 to 1
+move 19 from 5 to 6
+move 5 from 1 to 4
+move 1 from 2 to 9
+move 1 from 1 to 3
+move 7 from 5 to 8
+move 1 from 3 to 6
+move 8 from 7 to 3
+move 7 from 4 to 8
+move 3 from 8 to 5
+move 1 from 4 to 1
+move 1 from 9 to 4
+move 1 from 4 to 9
+move 1 from 5 to 2
+move 2 from 5 to 6
+move 2 from 8 to 2
+move 7 from 8 to 1
+move 1 from 1 to 7
+move 3 from 6 to 9
+move 2 from 3 to 2
+move 1 from 2 to 1
+move 1 from 8 to 7
+move 2 from 9 to 6
+move 2 from 9 to 5
+move 1 from 5 to 6
+move 1 from 2 to 8
+move 2 from 1 to 7
+move 1 from 4 to 3
+move 3 from 2 to 5
+move 7 from 1 to 3
+move 10 from 3 to 4
+move 3 from 5 to 4
+move 1 from 3 to 8
+move 3 from 3 to 2
+move 1 from 8 to 1
+move 1 from 1 to 3
+move 3 from 8 to 3
+move 5 from 4 to 6
+move 1 from 2 to 3
+move 4 from 6 to 4
+move 1 from 5 to 7
+move 4 from 3 to 4
+move 1 from 2 to 8
+move 12 from 7 to 6
+move 1 from 8 to 2
+move 2 from 2 to 7
+move 1 from 8 to 4
+move 23 from 6 to 3
+move 14 from 3 to 6
+move 15 from 4 to 6
+move 1 from 8 to 6
+move 10 from 3 to 7
+move 2 from 4 to 2
+move 11 from 7 to 8
+move 2 from 2 to 6
+move 44 from 6 to 9
+move 21 from 9 to 3
+move 12 from 3 to 6
+move 1 from 7 to 4
+move 1 from 4 to 7
+move 9 from 3 to 2
+move 2 from 8 to 6
+move 3 from 2 to 4
+move 17 from 9 to 1
+move 3 from 4 to 6
+move 2 from 2 to 9
+move 4 from 9 to 2
+move 10 from 6 to 9
+move 1 from 7 to 6
+move 4 from 9 to 5
+move 4 from 2 to 4
+move 14 from 1 to 5
+move 4 from 4 to 3
+move 3 from 2 to 9
+move 9 from 9 to 7
+move 1 from 2 to 5
+move 9 from 8 to 5
+move 8 from 7 to 2
+move 4 from 3 to 8
+move 5 from 6 to 2
+move 3 from 1 to 6
+move 1 from 7 to 1
+move 4 from 2 to 4
+move 3 from 6 to 4
+move 3 from 8 to 3
+move 13 from 5 to 2
+move 2 from 3 to 5
+move 12 from 5 to 9
+move 1 from 3 to 5
+move 1 from 5 to 9
+move 1 from 8 to 3
+move 4 from 9 to 5
+move 6 from 4 to 5
+move 12 from 9 to 7
+move 1 from 9 to 3
+move 1 from 3 to 2
+move 12 from 5 to 6
+move 12 from 7 to 2
+move 1 from 3 to 7
+move 1 from 4 to 8
+move 33 from 2 to 8
+move 1 from 7 to 5
+move 1 from 1 to 2
+move 4 from 5 to 4
+move 3 from 2 to 5
+move 34 from 8 to 6
+move 1 from 4 to 3
+move 1 from 5 to 7
+move 1 from 7 to 5
+move 3 from 4 to 9
+move 2 from 9 to 7
+move 1 from 9 to 4
+move 1 from 3 to 7
+move 1 from 5 to 8
+move 1 from 5 to 1
+move 1 from 5 to 7
+move 1 from 4 to 8
+move 1 from 1 to 4
+move 1 from 4 to 2
+move 3 from 7 to 5
+move 2 from 8 to 5
+move 1 from 2 to 8
+move 4 from 6 to 2
+move 1 from 8 to 6
+move 1 from 7 to 9
+move 29 from 6 to 7
+move 4 from 2 to 3
+move 2 from 5 to 8
+move 1 from 9 to 5
+move 2 from 8 to 1
+move 23 from 7 to 5
+move 2 from 6 to 1
+move 23 from 5 to 6
+move 1 from 3 to 6
+move 4 from 5 to 9
+move 2 from 1 to 3
+move 5 from 3 to 8
+move 2 from 6 to 5
+move 2 from 1 to 4
+move 1 from 9 to 8
+move 1 from 9 to 1
+move 1 from 4 to 6
+move 2 from 5 to 6
+move 6 from 7 to 8
+move 2 from 9 to 2
+move 18 from 6 to 5
+move 21 from 6 to 4
+move 1 from 1 to 6
+move 2 from 6 to 7
+move 2 from 7 to 9
+move 2 from 2 to 8
+move 7 from 4 to 3
+move 12 from 5 to 3
+move 1 from 9 to 5
+move 1 from 9 to 4
+move 6 from 5 to 2
+move 17 from 3 to 4
+move 3 from 4 to 3
+move 1 from 2 to 4
+move 5 from 2 to 8
+move 1 from 5 to 8
+move 19 from 8 to 7
+move 1 from 3 to 6
+move 1 from 8 to 4
+move 1 from 6 to 1
+move 15 from 4 to 6
+move 1 from 1 to 4
+move 3 from 3 to 5
+move 4 from 6 to 7
+move 1 from 4 to 7
+move 10 from 6 to 7
+move 16 from 4 to 5
+move 24 from 7 to 2
+move 8 from 7 to 8
+move 1 from 4 to 2
+move 6 from 8 to 7
+move 1 from 8 to 7
+move 1 from 6 to 9
+move 14 from 5 to 4
+move 9 from 7 to 8
+move 4 from 5 to 1
+move 2 from 1 to 5
+move 3 from 8 to 6
+move 2 from 6 to 9
+move 2 from 2 to 8
+move 6 from 2 to 7
+move 3 from 4 to 6
+move 1 from 3 to 4
+move 3 from 5 to 7
+move 1 from 6 to 9
+move 5 from 7 to 2
+move 4 from 9 to 1
+move 1 from 7 to 9
+move 9 from 8 to 4
+move 5 from 1 to 2
+move 2 from 6 to 1
+move 6 from 4 to 7
+move 1 from 7 to 3
+move 1 from 3 to 9
+move 1 from 9 to 7
+move 1 from 6 to 7
+move 9 from 4 to 5
+move 7 from 7 to 9
+move 3 from 7 to 5
+move 1 from 9 to 2
+move 6 from 9 to 8
+move 4 from 4 to 5
+move 1 from 4 to 2
+move 1 from 4 to 2
+move 2 from 1 to 2
+move 1 from 9 to 8
+move 10 from 2 to 4
+move 8 from 2 to 7
+move 12 from 2 to 9
+move 6 from 7 to 4
+move 1 from 1 to 2
+move 8 from 9 to 8
+move 7 from 5 to 1
+move 9 from 4 to 3
+move 14 from 8 to 4
+move 1 from 8 to 4
+move 1 from 1 to 5
+move 1 from 5 to 2
+move 3 from 2 to 4
+move 1 from 7 to 1
+move 1 from 7 to 3
+move 2 from 1 to 7
+move 3 from 5 to 7
+move 2 from 7 to 6
+move 1 from 6 to 5
+move 3 from 7 to 1
+move 1 from 6 to 8
+move 1 from 8 to 7
+move 1 from 3 to 6
+move 1 from 7 to 1
+move 4 from 1 to 4
+move 6 from 3 to 2
+move 3 from 1 to 2
+move 3 from 3 to 6
+move 3 from 2 to 6
+move 6 from 6 to 5
+move 1 from 1 to 4
+move 1 from 9 to 6
+move 5 from 2 to 1
+move 3 from 1 to 2
+move 2 from 9 to 8
+move 3 from 1 to 5
+move 1 from 9 to 7
+move 25 from 4 to 1
+move 1 from 1 to 7
+move 2 from 8 to 3
+move 13 from 1 to 9
+move 2 from 3 to 5
+move 8 from 5 to 9
+move 4 from 2 to 1
+move 2 from 6 to 7
+move 10 from 5 to 9
+move 4 from 7 to 2
+move 2 from 2 to 3
+move 9 from 9 to 2
+move 4 from 4 to 5
+move 4 from 5 to 4
+move 5 from 1 to 4
+move 10 from 4 to 5
+move 22 from 9 to 1
+move 2 from 2 to 7
+move 3 from 2 to 1
+move 6 from 2 to 6
+move 1 from 7 to 1
+move 10 from 5 to 7
+move 15 from 1 to 4
+move 13 from 1 to 5
+move 3 from 6 to 8
+move 1 from 8 to 9`
 // Split raw data into crate and instructions
 
 
@@ -6577,10 +7082,8 @@ function columnCounter(item) {
 
 // Split moves into an array - one move per array item
 function day5MoveParser(string) {
-	//console.log('move parser initial', string)
 	const moveArray = string.split('\n')
 	splitStringsForMoves(moveArray)
-	console.log('move array', moveArray)
 }
 
 function splitStringsForMoves(string) {
@@ -6590,93 +7093,43 @@ function splitStringsForMoves(string) {
 		let cratesToMove = Number.parseInt(lineArray[1])
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
-		console.log("Parsed move:", cratesToMove, fromArray, toArray)
 		// Send to move function here
 		day5BoxMover(cratesToMove, fromArray, toArray)
 	})
 }
 
 function day5BoxMover(cratesToMove, fromArray, toArray) {
-	console.log(boxPositions)
-	// while (cratesToMove > 0) {
-		//TODO: Write move function		
-	// }
+	while (cratesToMove > 0) {
+		//TODO: Write move function
+		let movedBox = 	boxPositions[fromArray - 1].shift()
+		boxPositions[toArray - 1].unshift(movedBox)
+		cratesToMove --
+	}
+}
+
+function returnTopCrates(array) {
+	let solutionArray = []
+	array.forEach((column) => {
+		solutionArray.push(column[0])
+	})
+	return solutionArray
 }
 
 function day5DataParser(string) {
 	const day5Split = day5TestRaw.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
-	//console.log('dataParser initial',string)
 	// Get the number of columns of boxes
 	arrayCols = findNumberOfColumns(day5Data)
-	//console.log('ArrayCols', arrayCols)
 	// Create an array for each column of boxes
 	boxPositionArrays(arrayCols)
-	//console.log('boxPositionArray before', boxPositions)
 	// Sort each box (or empty string) into the boxPositionArray
 	boxSorter(day5Data)
-	console.log('boxPositions', boxPositions)
 	// Parse the move string
 	day5MoveParser(day5Moves)
-
+	day51solutionArray = returnTopCrates(boxPositions)
 }
 
-
-
-// // Sort the boxes into the appropriate array
-// function columnCounter(data) {
-// 	data = data.trim()
-// 	if (counter < arrayCols) {
-// 		boxPositions[counter].push(data)
-// 		counter = counter +1
-// 	} else {
-// 		counter = 0
-// 		boxPositions[counter].push(data)
-// 		counter++
-// 	}
-// }
-
-// // Parsing data for day 5 - send to appropriate functions
-// function day5DataParser(string) {
-// 	findNumberOfCols(string)
-// 	for (i = 0; i < string.length; i = i + 4) {
-// 		let start = i
-// 		let end = i + 4
-// 		if (isBox(string.substring(start,end))) {
-// 			columnCounter(string.substring(start,end))
-// 		} else if (isNumber(string.substring(start,end))){
-// 			continue
-// 		} else {
-// 			columnCounter('')
-// 		}
-// 	}
-// }
-
-// function day5MoveParser(string){
-// 	const moveArray = string.split('\n')
-// 	moveArray.forEach((line) => {
-// 		let fromArray = ''
-// 		let cratesToMove = ''
-// 		let toArray = ''
-// 		const splitLine = line.split('\n')
-// 		cratesToMove = Number.parseInt(splitLine[1])
-// 		fromArray = Number.parseInt(splitLine[3])
-// 		toArray = Number.parseInt(splitLine[5])
-// 		//day5CrateMover(fromArray, cratesToMove, toArray)
-// 		console.log(fromArray,cratesToMove, toArray)
-// 	})
-// 	return moveArray
-// }
-
-// // Sort the crates
-// function day5CrateMover(fromArray, cratesToMove, toArray) {
-// 	console.log("from", fromArray, "to", toArray, "move", boxPositions[fromArray])
-// 	//TODO Need to test to make sure movedBox is NOT an empty string ('')
-// 	console.log("movedBox", movedBox)
-// 	//boxPositions[toArray].unshift(movedBox)
-// 	console.log("Boxes in toArray/fromArray", boxPositions[fromArray], boxPositions[toArray])
-// }
-// console.log("Day 5 moves", day5Moves)
-// console.log("Box position array", boxPositions)
-// // console.log(day5CrateMover)
+// Output Day 5-1
+const day51 = document.getElementById('day5-1')
+day51.innerText = day51solutionArray
