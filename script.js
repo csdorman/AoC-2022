@@ -7013,7 +7013,8 @@ move 1 from 8 to 9`
 // Split raw data into crate and instructions
 
 
-const day51Solution = day5DataParser(day5TestRaw)
+//const day51Solution = day5DataParser(day5TestRaw)
+const day52Solution = day52DataParser(day5TestRaw)
 // Test for Box
 function isBox(string) {
 	const boxRegex = /\[\w\]/
@@ -7095,6 +7096,10 @@ function day5MoveParser(string) {
 	const moveArray = string.split('\n')
 	splitStringsForMoves(moveArray)
 }
+function day52MoveParser(string) {
+	const moveArray = string.split('\n')
+	splitStringsForMoves52(moveArray)
+}
 
 function splitStringsForMoves(string) {
 	string.forEach((move) => {
@@ -7104,17 +7109,34 @@ function splitStringsForMoves(string) {
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
 		// Send to move function here
-		day5BoxMover(cratesToMove, fromArray, toArray)
+		day51BoxMover(cratesToMove, fromArray, toArray)
+		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
+	})
+}
+function splitStringsForMoves52(string) {
+	string.forEach((move) => {
+		// Turn each line into an array
+		let lineArray = move.split(' ')
+		let cratesToMove = Number.parseInt(lineArray[1])
+		let fromArray = Number.parseInt(lineArray[3])
+		let toArray = Number.parseInt(lineArray[5])
+		// Send to move function here
+		day52BoxMover(cratesToMove, fromArray, toArray)
+		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
 	})
 }
 
-function day5BoxMover(cratesToMove, fromArray, toArray) {
+function day51BoxMover(cratesToMove, fromArray, toArray) {
 	while (cratesToMove > 0) {
-		//TODO: Write move function
 		let movedBox = 	boxPositions[fromArray - 1].shift()
 		boxPositions[toArray - 1].unshift(movedBox)
 		cratesToMove --
 	}
+}
+
+function day52BoxMover(cratesToMove, fromArray, toArray) {
+	let movedBoxes = boxPositions[fromArray - 1].splice(0, cratesToMove)
+	boxPositions[toArray-1].unshift(movedBoxes)
 }
 
 function returnTopCrates(array) {
@@ -7122,24 +7144,41 @@ function returnTopCrates(array) {
 	array.forEach((column) => {
 		solutionArray.push(column[0])
 	})
+	console.log(solutionArray)
 	return solutionArray
 }
 
-function day5DataParser(string) {
-	const day5Split = day5DataRaw.split('\n\n')
+// Day 5-1 solution
+// function day5DataParser(string) {
+// 	const day5Split = day5DataRaw.split('\n\n')
+// 	const day5Data = day5Split[0]
+// 	const day5Moves = day5Split[1]
+// 	// Get the number of columns of boxes
+// 	arrayCols = findNumberOfColumns(day5Data)
+// 	// Create an array for each column of boxes
+// 	boxPositionArrays(arrayCols)
+// 	// Sort each box (or empty string) into the boxPositionArray
+// 	boxSorter(day5Data)
+// 	// Parse the move string
+// 	day5MoveParser(day5Moves)
+// 	day51solutionArray = returnTopCrates(boxPositions)
+// }
+
+// Day 5-2 solution
+function day52DataParser(string) {
+	const day5Split = day5TestRaw.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
-	// Get the number of columns of boxes
 	arrayCols = findNumberOfColumns(day5Data)
-	// Create an array for each column of boxes
 	boxPositionArrays(arrayCols)
-	// Sort each box (or empty string) into the boxPositionArray
 	boxSorter(day5Data)
-	// Parse the move string
-	day5MoveParser(day5Moves)
-	day51solutionArray = returnTopCrates(boxPositions)
+	day52MoveParser(day5Moves)
+	day52solutionArray = returnTopCrates(boxPositions)
 }
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
-day51.innerText = day51solutionArray
+//day51.innerText = day51solutionArray
+
+// Output Day 5-2
+const day52 = document.getElementById('day5-2')
