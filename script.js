@@ -6481,7 +6481,7 @@ day42.innerText = day42Solution(day41Data)
 // Day 5
 
 // Arrays for each column
-let boxPositions = []
+//let boxPositions = []
 let arrayCols 
 let counter = 0
 
@@ -7010,11 +7010,7 @@ move 15 from 1 to 4
 move 13 from 1 to 5
 move 3 from 6 to 8
 move 1 from 8 to 9`
-// Split raw data into crate and instructions
 
-
-//const day51Solution = day5DataParser(day5TestRaw)
-const day52Solution = day52DataParser(day5TestRaw)
 // Test for Box
 function isBox(string) {
 	const boxRegex = /\[\w\]/
@@ -7051,20 +7047,22 @@ function findNumberOfColumns(row) {
 
 // Create an array inside boxPositions for each column
 function boxPositionArrays(num) {
+	let boxPositions = []
 	for (i = 0; i < num; i++){
 		boxPositions[i] = []
 	}
+	return boxPositions
 }
 
 // Separate boxes from whitespaces
-function boxSorter(string) {
+function boxSorter(string, boxPositions) {
 	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
 		if (isBox(string.substring(start,end))) {
-			columnCounter(string.substring(start,end))
+			columnCounter(string.substring(start,end), boxPositions)
 		} else if (is4WhiteSpaces(string.substring(start,end))) {
-			columnCounter(string.substring(start,end))
+			columnCounter(string.substring(start,end), boxPositions)
 		} else {
 			return
 		}
@@ -7072,7 +7070,7 @@ function boxSorter(string) {
 }
 
 // Send boxes (or whitespace) to appropriate array
-function columnCounter(item) {
+function columnCounter(item, boxPositions) {
 	if (!is4WhiteSpaces(item)) {
 		 item = item.trim()
 	}
@@ -7092,16 +7090,17 @@ function columnCounter(item) {
 }
 
 // Split moves into an array - one move per array item
-function day5MoveParser(string) {
+function day5MoveParser(string, boxPositions) {
 	const moveArray = string.split('\n')
-	splitStringsForMoves(moveArray)
-}
-function day52MoveParser(string) {
-	const moveArray = string.split('\n')
-	splitStringsForMoves52(moveArray)
+	splitStringsForMoves(moveArray, boxPositions)
 }
 
-function splitStringsForMoves(string) {
+function day52MoveParser(string, boxPositions) {
+	const moveArray = string.split('\n')
+	splitStringsForMoves52(moveArray, boxPositions)
+}
+
+function splitStringsForMoves(string, boxPositions) {
 	string.forEach((move) => {
 		// Turn each line into an array
 		let lineArray = move.split(' ')
@@ -7109,11 +7108,12 @@ function splitStringsForMoves(string) {
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
 		// Send to move function here
-		day51BoxMover(cratesToMove, fromArray, toArray)
+		day51BoxMover(cratesToMove, fromArray, toArray, boxPositions)
 		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
 	})
 }
-function splitStringsForMoves52(string) {
+
+function splitStringsForMoves52(string, boxPositions) {
 	string.forEach((move) => {
 		// Turn each line into an array
 		let lineArray = move.split(' ')
@@ -7121,12 +7121,11 @@ function splitStringsForMoves52(string) {
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
 		// Send to move function here
-		day52BoxMover(cratesToMove, fromArray, toArray)
-		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
+		day52BoxMover(cratesToMove, fromArray, toArray, boxPositions)
 	})
 }
 
-function day51BoxMover(cratesToMove, fromArray, toArray) {
+function day51BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
 	while (cratesToMove > 0) {
 		let movedBox = 	boxPositions[fromArray - 1].shift()
 		boxPositions[toArray - 1].unshift(movedBox)
@@ -7134,9 +7133,11 @@ function day51BoxMover(cratesToMove, fromArray, toArray) {
 	}
 }
 
-function day52BoxMover(cratesToMove, fromArray, toArray) {
+function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
+	console.log(typeof boxPositions, "before", boxPositions)
 	let movedBoxes = boxPositions[fromArray - 1].splice(0, cratesToMove)
 	boxPositions[toArray-1].unshift(movedBoxes)
+	console.log("after", boxPositions)
 }
 
 function returnTopCrates(array) {
@@ -7149,36 +7150,42 @@ function returnTopCrates(array) {
 }
 
 // Day 5-1 solution
-// function day5DataParser(string) {
-// 	const day5Split = day5DataRaw.split('\n\n')
-// 	const day5Data = day5Split[0]
-// 	const day5Moves = day5Split[1]
-// 	// Get the number of columns of boxes
-// 	arrayCols = findNumberOfColumns(day5Data)
-// 	// Create an array for each column of boxes
-// 	boxPositionArrays(arrayCols)
-// 	// Sort each box (or empty string) into the boxPositionArray
-// 	boxSorter(day5Data)
-// 	// Parse the move string
-// 	day5MoveParser(day5Moves)
-// 	day51solutionArray = returnTopCrates(boxPositions)
-// }
+function day5DataParser(string) {
+	const day5Split = string.split('\n\n')
+	const day5Data = day5Split[0]
+	const day5Moves = day5Split[1]
+	// Get the number of columns of boxes
+	arrayCols = findNumberOfColumns(day5Data)
+	// Create an array for each column of boxes
+	boxPositions = boxPositionArrays(arrayCols)
+	// Sort each box (or empty string) into the boxPositionArray
+	boxSorter(day5Data, boxPositions)
+	// Parse the move string
+	day5MoveParser(day5Moves, boxPositions)
+	return returnTopCrates(boxPositions)
+
+}
 
 // Day 5-2 solution
 function day52DataParser(string) {
-	const day5Split = day5TestRaw.split('\n\n')
+	// TODO: boxPositions is not starting as empty - keeping prior contents
+	console.log("first", boxPositions)
+	const day5Split = string.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
 	arrayCols = findNumberOfColumns(day5Data)
-	boxPositionArrays(arrayCols)
-	boxSorter(day5Data)
-	day52MoveParser(day5Moves)
+	boxPositions = boxPositionArrays(arrayCols)
+	console.log("bp 2", boxPositions)
+	boxSorter(day5Data, boxPositions)
+	day52MoveParser(day5Moves, boxPositions)
 	day52solutionArray = returnTopCrates(boxPositions)
 }
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
-//day51.innerText = day51solutionArray
+day51.innerText = day5DataParser(day5TestRaw)
+
 
 // Output Day 5-2
 const day52 = document.getElementById('day5-2')
+day52.innerText = day52DataParser(day5TestRaw)
