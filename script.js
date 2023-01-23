@@ -7048,7 +7048,9 @@ function findNumberOfColumns(row) {
 // Create an array inside boxPositions for each column
 function boxPositionArrays(num) {
 	let boxPositions = []
+	console.log("bpa initial", boxPositions, num)
 	for (i = 0; i < num; i++){
+		console.log("bpa func",boxPositions)
 		boxPositions[i] = []
 	}
 	return boxPositions
@@ -7134,8 +7136,8 @@ function day51BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
 }
 
 function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
-	console.log(typeof boxPositions, "before", boxPositions)
-	let movedBoxes = boxPositions[fromArray - 1].splice(0, cratesToMove)
+	console.log(typeof boxPositions, "before", boxPositions,"from", boxPositions[fromArray-1])
+	let movedBoxes = boxPositions[fromArray-1].splice(0, cratesToMove)
 	boxPositions[toArray-1].unshift(movedBoxes)
 	console.log("after", boxPositions)
 }
@@ -7157,7 +7159,8 @@ function day5DataParser(string) {
 	// Get the number of columns of boxes
 	arrayCols = findNumberOfColumns(day5Data)
 	// Create an array for each column of boxes
-	boxPositions = boxPositionArrays(arrayCols)
+	// boxPositions = []
+	boxPositions = boxPositionArrays(arrayCols, boxPositions)
 	// Sort each box (or empty string) into the boxPositionArray
 	boxSorter(day5Data, boxPositions)
 	// Parse the move string
@@ -7169,10 +7172,12 @@ function day5DataParser(string) {
 // Day 5-2 solution
 function day52DataParser(string) {
 	// TODO: boxPositions is not starting as empty - keeping prior contents
-	console.log("first", boxPositions)
+	// Probably will need to rewrite Day 5-1 with immutable funcs
+	// console.log("first", boxPositions)
 	const day5Split = string.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
+	console.log(day5Data)
 	arrayCols = findNumberOfColumns(day5Data)
 	boxPositions = boxPositionArrays(arrayCols)
 	console.log("bp 2", boxPositions)
@@ -7183,7 +7188,7 @@ function day52DataParser(string) {
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
-day51.innerText = day5DataParser(day5TestRaw)
+//day51.innerText = day5DataParser(day5TestRaw)
 
 
 // Output Day 5-2
