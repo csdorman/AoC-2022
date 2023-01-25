@@ -7058,6 +7058,7 @@ function boxPositionArrays(num) {
 
 // Separate boxes from whitespaces
 function boxSorter(string, boxPositions) {
+	console.log("sorted", boxPositions)
 	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
@@ -7093,8 +7094,9 @@ function columnCounter(item, boxPositions) {
 
 // Split moves into an array - one move per array item
 function day5MoveParser(string, boxPositions) {
+	const movedBoxes = boxPositions
 	const moveArray = string.split('\n')
-	splitStringsForMoves(moveArray, boxPositions)
+	splitStringsForMoves(moveArray, movedBoxes)
 }
 
 function day52MoveParser(string, boxPositions) {
@@ -7102,7 +7104,7 @@ function day52MoveParser(string, boxPositions) {
 	splitStringsForMoves52(moveArray, boxPositions)
 }
 
-function splitStringsForMoves(string, boxPositions) {
+function splitStringsForMoves(string, movedBoxes) {
 	string.forEach((move) => {
 		// Turn each line into an array
 		let lineArray = move.split(' ')
@@ -7110,7 +7112,7 @@ function splitStringsForMoves(string, boxPositions) {
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
 		// Send to move function here
-		day51BoxMover(cratesToMove, fromArray, toArray, boxPositions)
+		day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes)
 		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
 	})
 }
@@ -7127,10 +7129,11 @@ function splitStringsForMoves52(string, boxPositions) {
 	})
 }
 
-function day51BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
+function day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes) {
 	while (cratesToMove > 0) {
-		let movedBox = 	boxPositions[fromArray - 1].shift()
-		boxPositions[toArray - 1].unshift(movedBox)
+		let movedBox = 	movedBoxes[fromArray - 1].shift()
+		movedBoxes[toArray - 1].unshift(movedBox)
+		console.log("moved boxes", movedBoxes)
 		cratesToMove --
 	}
 }
@@ -7143,7 +7146,7 @@ function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
 }
 
 function returnTopCrates(array) {
-	let solutionArray = []
+	const solutionArray = []
 	array.forEach((column) => {
 		solutionArray.push(column[0])
 	})
@@ -7160,12 +7163,12 @@ function day5DataParser(string) {
 	arrayCols = findNumberOfColumns(day5Data)
 	// Create an array for each column of boxes
 	// boxPositions = []
-	boxPositions = boxPositionArrays(arrayCols, boxPositions)
+	const boxPositions = boxPositionArrays(arrayCols)
 	// Sort each box (or empty string) into the boxPositionArray
 	boxSorter(day5Data, boxPositions)
 	// Parse the move string
-	day5MoveParser(day5Moves, boxPositions)
-	return returnTopCrates(boxPositions)
+	const day51MovedBoxes = day5MoveParser(day5Moves, boxPositions)
+	return returnTopCrates(day51MovedBoxes)
 
 }
 
@@ -7174,6 +7177,7 @@ function day52DataParser(string) {
 	// TODO: boxPositions is not starting as empty - keeping prior contents
 	// Probably will need to rewrite Day 5-1 with immutable funcs
 	// console.log("first", boxPositions)
+	console.log("SHOULDNT RUN YET")
 	const day5Split = string.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
@@ -7188,9 +7192,9 @@ function day52DataParser(string) {
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
-//day51.innerText = day5DataParser(day5TestRaw)
+day51.innerText = day5DataParser(day5TestRaw)
 
 
 // Output Day 5-2
 const day52 = document.getElementById('day5-2')
-day52.innerText = day52DataParser(day5TestRaw)
+//day52.innerText = day52DataParser(day5TestRaw)
