@@ -6482,8 +6482,7 @@ day42.innerText = day42Solution(day41Data)
 
 // Arrays for each column
 //let boxPositions = []
-let arrayCols 
-let counter = 0
+//let counter = 0
 
 // Raw and real data
 const day5TestRaw = `    [D]    
@@ -7057,23 +7056,22 @@ function boxPositionArrays(num) {
 }
 
 // Separate boxes from whitespaces
-function boxSorter(string, boxPositions) {
-	console.log("sorted", boxPositions)
+function boxSorter(string, boxPositions, arrayCols) {
 	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
 		if (isBox(string.substring(start,end))) {
-			columnCounter(string.substring(start,end), boxPositions)
+			columnCounter(string.substring(start,end), boxPositions, arrayCols)
 		} else if (is4WhiteSpaces(string.substring(start,end))) {
-			columnCounter(string.substring(start,end), boxPositions)
-		} else {
-			return
-		}
+			columnCounter(string.substring(start,end), boxPositions, arrayCols)
+		} 
 	}
+	return
 }
 
 // Send boxes (or whitespace) to appropriate array
-function columnCounter(item, boxPositions) {
+function columnCounter(item, boxPositions, arrayCols) {
+	counter = 0
 	if (!is4WhiteSpaces(item)) {
 		 item = item.trim()
 	}
@@ -7089,24 +7087,24 @@ function columnCounter(item, boxPositions) {
 		counter = 0
 		boxPositions[counter].push(item)
 		counter ++
-	}
+	} 
+	return boxPositions
 }
 
 // Split moves into an array - one move per array item
 function day5MoveParser(string, boxPositions) {
 	const movedBoxes = boxPositions
 	const moveArray = string.split('\n')
-	splitStringsForMoves(moveArray, movedBoxes)
+	console.log(movedBoxes,moveArray)
+	let result = splitStringsForMoves(moveArray, movedBoxes)
+	console.log("day5 result", result)
+	return result
 }
 
-function day52MoveParser(string, boxPositions) {
-	const moveArray = string.split('\n')
-	splitStringsForMoves52(moveArray, boxPositions)
-}
 
 function splitStringsForMoves(string, movedBoxes) {
-	string.forEach((move) => {
-		// Turn each line into an array
+	// Turn each line into an array
+	movedBoxes = string.forEach((move) => {
 		let lineArray = move.split(' ')
 		let cratesToMove = Number.parseInt(lineArray[1])
 		let fromArray = Number.parseInt(lineArray[3])
@@ -7117,18 +7115,6 @@ function splitStringsForMoves(string, movedBoxes) {
 	})
 }
 
-function splitStringsForMoves52(string, boxPositions) {
-	string.forEach((move) => {
-		// Turn each line into an array
-		let lineArray = move.split(' ')
-		let cratesToMove = Number.parseInt(lineArray[1])
-		let fromArray = Number.parseInt(lineArray[3])
-		let toArray = Number.parseInt(lineArray[5])
-		// Send to move function here
-		day52BoxMover(cratesToMove, fromArray, toArray, boxPositions)
-	})
-}
-
 function day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes) {
 	while (cratesToMove > 0) {
 		let movedBox = 	movedBoxes[fromArray - 1].shift()
@@ -7136,6 +7122,7 @@ function day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes) {
 		console.log("moved boxes", movedBoxes)
 		cratesToMove --
 	}
+	return cratesToMove
 }
 
 function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
@@ -7147,6 +7134,7 @@ function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
 
 function returnTopCrates(array) {
 	const solutionArray = []
+	console.log("array", array)
 	array.forEach((column) => {
 		solutionArray.push(column[0])
 	})
@@ -7154,41 +7142,36 @@ function returnTopCrates(array) {
 	return solutionArray
 }
 
-// Day 5-1 solution
-function day5DataParser(string) {
+// Create box array
+function boxSortingFunc(string) {
+	//TODO: Get this function working should console.log one empty array and the boxes in og position
+	// take in input string
 	const day5Split = string.split('\n\n')
 	const day5Data = day5Split[0]
 	const day5Moves = day5Split[1]
-	// Get the number of columns of boxes
-	arrayCols = findNumberOfColumns(day5Data)
-	// Create an array for each column of boxes
-	// boxPositions = []
-	const boxPositions = boxPositionArrays(arrayCols)
-	// Sort each box (or empty string) into the boxPositionArray
-	boxSorter(day5Data, boxPositions)
-	// Parse the move string
-	const day51MovedBoxes = day5MoveParser(day5Moves, boxPositions)
-	return returnTopCrates(day51MovedBoxes)
+	// get the number of columns
+	const arrayCols = findNumberOfColumns(day5Data)
+	// create an empty array of boxes for each column
+	const boxEmptyArray = boxPositionArrays(arrayCols)
+	console.log("box empty array", boxEmptyArray)
+	//Sort the boxes into the empty array
+	const boxStartingArray = boxSorter(day5Data, boxEmptyArray, arrayCols)
+	console.log("box before moves", boxStartingArray)
+	return {positions: boxStartingArray, moves: day5Moves}
+}
 
+// Day 5-1 solution
+function day5DataParser(string) {
+	const boxes = boxSortingFunc(string)
+	let boxPositions = boxes.positions
+	let day5Moves = boxes.moves
+	// Parse the move string
+	// const day51MovedBoxes = day5MoveParser(day5Moves, boxPositions)
+	// const result = returnTopCrates(day51MovedBoxes)
+	//return result
 }
 
 // Day 5-2 solution
-function day52DataParser(string) {
-	// TODO: boxPositions is not starting as empty - keeping prior contents
-	// Probably will need to rewrite Day 5-1 with immutable funcs
-	// console.log("first", boxPositions)
-	console.log("SHOULDNT RUN YET")
-	const day5Split = string.split('\n\n')
-	const day5Data = day5Split[0]
-	const day5Moves = day5Split[1]
-	console.log(day5Data)
-	arrayCols = findNumberOfColumns(day5Data)
-	boxPositions = boxPositionArrays(arrayCols)
-	console.log("bp 2", boxPositions)
-	boxSorter(day5Data, boxPositions)
-	day52MoveParser(day5Moves, boxPositions)
-	day52solutionArray = returnTopCrates(boxPositions)
-}
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
