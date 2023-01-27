@@ -7046,10 +7046,8 @@ function findNumberOfColumns(row) {
 
 // Create an array inside boxPositions for each column
 function boxPositionArrays(num) {
-	let boxPositions = []
-	console.log("bpa initial", boxPositions, num)
+	const boxPositions = []
 	for (i = 0; i < num; i++){
-		console.log("bpa func",boxPositions)
 		boxPositions[i] = []
 	}
 	return boxPositions
@@ -7057,72 +7055,64 @@ function boxPositionArrays(num) {
 
 // Separate boxes from whitespaces
 function boxSorter(string, boxPositions, arrayCols) {
+	let counter = 0
+	const emptyBoxArray = boxPositions
 	for (i = 0; i < string.length; i = i +4) {
 		let start = i
 		let end = i + 4
-		if (isBox(string.substring(start,end))) {
-			columnCounter(string.substring(start,end), boxPositions, arrayCols)
-		} else if (is4WhiteSpaces(string.substring(start,end))) {
-			columnCounter(string.substring(start,end), boxPositions, arrayCols)
-		} 
-	}
-	return
-}
-
-// Send boxes (or whitespace) to appropriate array
-function columnCounter(item, boxPositions, arrayCols) {
-	counter = 0
-	if (!is4WhiteSpaces(item)) {
-		 item = item.trim()
-	}
-	// Push valid box into boxPositions
-	if (counter < arrayCols && !is4WhiteSpaces(item)) {
-		boxPositions[counter].push(item)
-		counter ++
-	// If it's blank, don't push
-	} else if (counter < arrayCols && is4WhiteSpaces(item)) {
-		counter ++
-	// Reset the counter when you exceed the number of columns
-	} else {
-		counter = 0
-		boxPositions[counter].push(item)
-		counter ++
-	} 
-	return boxPositions
+		let item = string.substring(start,end)
+		if (isBox(item) || is4WhiteSpaces(item)) {
+			if (!is4WhiteSpaces(item)) {
+				item = item.trim()
+			} 
+			// Push valid box into boxPositions
+			if (counter < arrayCols && !is4WhiteSpaces(item)) {
+				emptyBoxArray[counter].push(item)
+				counter ++
+			// If it's blank, don't push
+			} else if (counter < arrayCols && is4WhiteSpaces(item)) {
+				counter ++
+			// Reset the counter when you exceed the number of columns
+			} else {
+				counter = 0
+				emptyBoxArray[counter].push(item)
+				counter ++
+			}
+		}
+	}	
+	return emptyBoxArray
 }
 
 // Split moves into an array - one move per array item
 function day5MoveParser(string, boxPositions) {
-	const movedBoxes = boxPositions
 	const moveArray = string.split('\n')
-	console.log(movedBoxes,moveArray)
-	let result = splitStringsForMoves(moveArray, movedBoxes)
-	console.log("day5 result", result)
+	result = splitStringsForMoves(moveArray, boxPositions)
 	return result
 }
 
 
-function splitStringsForMoves(string, movedBoxes) {
+function splitStringsForMoves(string, boxPositions) {
 	// Turn each line into an array
-	movedBoxes = string.forEach((move) => {
+	let movedBoxes = string.forEach((move) => {
 		let lineArray = move.split(' ')
 		let cratesToMove = Number.parseInt(lineArray[1])
 		let fromArray = Number.parseInt(lineArray[3])
 		let toArray = Number.parseInt(lineArray[5])
 		// Send to move function here
-		day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes)
+		result = day51BoxMover(cratesToMove, fromArray, toArray, boxPositions)
 		//day52BoxMover(cratesToMove, fromArray, toArray, boxPositions52)
-	})
+	}) 
+	return result
 }
 
-function day51BoxMover(cratesToMove, fromArray, toArray, movedBoxes) {
+function day51BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
+	const day51MovedBoxes = boxPositions
 	while (cratesToMove > 0) {
-		let movedBox = 	movedBoxes[fromArray - 1].shift()
-		movedBoxes[toArray - 1].unshift(movedBox)
-		console.log("moved boxes", movedBoxes)
+		let movedBox = 	day51MovedBoxes[fromArray - 1].shift()
+		day51MovedBoxes[toArray - 1].unshift(movedBox)
 		cratesToMove --
 	}
-	return cratesToMove
+	return day51MovedBoxes
 }
 
 function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
@@ -7134,17 +7124,14 @@ function day52BoxMover(cratesToMove, fromArray, toArray, boxPositions) {
 
 function returnTopCrates(array) {
 	const solutionArray = []
-	console.log("array", array)
 	array.forEach((column) => {
 		solutionArray.push(column[0])
 	})
-	console.log(solutionArray)
 	return solutionArray
 }
 
 // Create box array
 function boxSortingFunc(string) {
-	//TODO: Get this function working should console.log one empty array and the boxes in og position
 	// take in input string
 	const day5Split = string.split('\n\n')
 	const day5Data = day5Split[0]
@@ -7153,11 +7140,9 @@ function boxSortingFunc(string) {
 	const arrayCols = findNumberOfColumns(day5Data)
 	// create an empty array of boxes for each column
 	const boxEmptyArray = boxPositionArrays(arrayCols)
-	console.log("box empty array", boxEmptyArray)
 	//Sort the boxes into the empty array
 	const boxStartingArray = boxSorter(day5Data, boxEmptyArray, arrayCols)
-	console.log("box before moves", boxStartingArray)
-	return {positions: boxStartingArray, moves: day5Moves}
+	return  {positions: boxStartingArray, moves: day5Moves}
 }
 
 // Day 5-1 solution
@@ -7166,12 +7151,13 @@ function day5DataParser(string) {
 	let boxPositions = boxes.positions
 	let day5Moves = boxes.moves
 	// Parse the move string
-	// const day51MovedBoxes = day5MoveParser(day5Moves, boxPositions)
-	// const result = returnTopCrates(day51MovedBoxes)
-	//return result
+	const day51MovedBoxes = day5MoveParser(day5Moves, boxPositions)
+	const result = returnTopCrates(day51MovedBoxes)
+	return result
 }
 
 // Day 5-2 solution
+//TODO Start here next time.
 
 // Output Day 5-1
 const day51 = document.getElementById('day5-1')
